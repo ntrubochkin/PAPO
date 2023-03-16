@@ -13,23 +13,23 @@
             <h2>Регистрация</h2>
             <form th:action="@{/registration-attempt}" method="post">
                 <div class="input-box">
-                    <input type="text" th:name="userName" placeholder="Введите своё имя" required>
+                    <input type="text" id="usernameInput" th:name="userName" placeholder="Введите своё имя" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" th:name="email" placeholder="Введите адрес свой электронной почты" required>
+                    <input type="text" id="emailInput" th:name="email" placeholder="Введите адрес свой электронной почты" required>
                 </div>
                 <div class="input-box">
-                    <input type="password" th:name="password" placeholder="Создайте пароль" required>
+                    <input type="password" id="pwdInput" th:name="password" placeholder="Создайте пароль" required>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Подтвердите пароль" required>
+                    <input type="password" id="pwdConfirmInput" placeholder="Подтвердите пароль" required>
                 </div>
                 <!-- <div class="policy">
         <input type="checkbox">
         <h3>I accept all terms & condition</h3>
       </div> -->
                 <div class="input-box button">
-                    <input type="Submit" value="Зарегистрироваться">
+                    <input type="Submit" id="submitBtn" value="Зарегистрироваться">
                 </div>
                 <div class="text">
                     <h3> <a href="login.html" th:href="@{/login}">Уже регистрировались?</a></h3>
