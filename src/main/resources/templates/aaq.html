@@ -2,7 +2,6 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сервис обмена книгами</title>
     <link rel="stylesheet" href="styles/style.css">
@@ -12,7 +11,7 @@
         <div class="wrapper">
             <div class="header_wrapper">
                 <div class="header_logo">
-                    <a href="@{/home}" class="header_logo-link">
+                    <a href="/" class="header_logo-link">
                         <img src="img/svg/logo.svg" alt="Сервис обмена книгами" class="header_logo-pic">
                     </a>
                     <h1 class="title">Сервис обмена книгами</h1>
@@ -42,23 +41,14 @@
                             <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
                             <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
                             <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
-                            <!-- <button type="submit" class="button_header_1">Главная</button>
-                            <button type="submit" class="button_header_2">Начать обмен</button>
-                            <button type="submit" class="button_header_3">Мои обмены</button>
-                            <button type="submit" class="button_header_4">Задать вопрос</button> -->
                     </nav>
             </div>            
         </div>
     </header>
 
-    <main class="main">
-        <div class="main-wrapper">
-            <div class="info-block">
-                <h1 class="intro_title">
-                    Описания приложения, правила обмена, чем интересно - “Сюрприз”...
-                </h1>
-            </div>
-            <!-- <img src="./img/intro-character.png" alt="intro-character" class="intro_character"> -->
+    <main class="trade">
+        <div class="main-trade">
+            
         </div>
     </main>
 </body>

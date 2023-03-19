@@ -30,6 +30,7 @@ public class DefaultController {
     //TODO может ему нужно будет выделить свой отдельный файлик
     @RequestMapping("/home")
     public String home(Model model) {
+        System.out.println("home");
         model.addAttribute(PageAttributes.HOME_IS_ANON, clientState.loggedIn);
         return "home";
     }
@@ -43,5 +44,22 @@ public class DefaultController {
     public String registration() {
         return "registration";
     }
-    
+
+    @RequestMapping("/go_trade")
+    public String goTrade(Model model) {
+        model.addAttribute(PageAttributes.HOME_IS_ANON, clientState.loggedIn);
+        return "go_trade";
+    }
+
+    @RequestMapping("/my_trades")
+    public String myTrades(Model model) {
+        model.addAttribute(PageAttributes.HOME_IS_ANON, clientState.loggedIn);
+        return "my_trades";
+    }
+
+    @RequestMapping("/aaq")
+    public String aaq(Model model) {
+        model.addAttribute(PageAttributes.HOME_IS_ANON, clientState.loggedIn);
+        return "aaq";
+    }
 }

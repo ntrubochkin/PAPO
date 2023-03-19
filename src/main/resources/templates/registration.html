@@ -10,34 +10,93 @@
 <body>
     <div class="container">
         <div class="wrapper">
-            <h2>Регистрация</h2>
-            <form th:action="@{/registration-attempt}" method="post">
-                <div class="input-box">
-                    <input type="text" id="usernameInput" th:name="userName" placeholder="Введите своё имя" required>
-                </div>
-                <div class="input-box">
-                    <input type="text" id="emailInput" th:name="email" placeholder="Введите адрес свой электронной почты" required>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="pwdInput" th:name="password" placeholder="Создайте пароль" required>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="pwdConfirmInput" placeholder="Подтвердите пароль" required>
-                </div>
-                <!-- <div class="policy">
-        <input type="checkbox">
-        <h3>I accept all terms & condition</h3>
-      </div> -->
-                <div class="input-box button">
-                    <input type="Submit" id="submitBtn" value="Зарегистрироваться">
-                </div>
-                <div class="text">
-                    <h3> <a href="login.html" th:href="@{/login}">Уже регистрировались?</a></h3>
-                </div>
-            </form>
-        </div>
-    </div>
+            <div class="column">
+                <h2 class="reg">Регистрация</h2>
+                <form th:action="@{/registration-attempt}" method="post" enctype="multipart/form-data">
+                    <div class="block_wrap">
+                        <div class="input-box-top">
+                            <div>Имя</div>
+                            <input type="text" id="firstnameInput" th:name="firstname" placeholder="Иван" required>
+                        </div>
+                        <div class="input-box-top">
+                            <div>Фамилия</div>
+                            <input type="text" id="secondnameInput" th:name="lastname" placeholder="Иванов" required>
+                        </div>
+                        <div class="input-box-top">
+                            <div>Отчество</div>
+                            <input type="text" id="surnameInput" th:name="surname" placeholder="Иванович">
+                        </div>
+                    </div>
+                    <div class="blank_blocks">
+                        <div class="left_column">
+                            <div class="input-box">
+                                <div>Электронная почта</div>
+                                <input type="text" id="emailInput" th:name="email" placeholder="Введите адрес свой электронной почты"
+                                    required>
+                            </div>
+                            <div class="input-box">
+                                <div>Ник</div>
+                                <input type="text" id="usernameInput" th:name="userName" placeholder="Придумайте ник" required>
+                            </div>
+                            <div class="input-box">
+                                <div>Пароль</div>
+                                <input type="password" id="pwdInput" th:name="password" placeholder="Создайте пароль" required>
+                            </div>
+                            <div class="input-box">
+                                <div>Подтвердить пароль</div>
+                                <input type="password" id="pwdconfirmInput" th:name="passwordConfirmStr" placeholder="Подтвердите пароль" required>
+                            </div>
+                                <label class="input-box-profile-photo">
+                                    <div>Загрузите фото профиля(jpg, png)</div>
+                                    <div class="profile_photo_input">
+                                        <input type="file" name="imageprofile" th:name="avatarFile" id="imageprofileInput" accept=".jpg, .jpeg, .png" >
+                                        <span>Выберите фото</span>
+                                    </div>
+                                </label>
+                        </div>
+                        <div class="right_column">
+                            <div class="input-box">
+                                <div>Город*</div>
+                                <input name="text" id="city" th:name="city" placeholder="Самара"></input>
+                            </div>
+                            <div class="input-box">
+                                <div>Улица*</div>
+                                <input name="text" id="street" th:name="street" placeholder="Название улицы"></input>
+                            </div>
 
+
+                            <div class="address_bottom_block">
+                                <div class="input-box">
+                                    <div>Строение*</div>
+                                    <input name="text" id="building" th:name="building" placeholder="номер"></input>
+                                </div>
+                                <div class="input-box">
+                                    <div>Дом*</div>
+                                    <input name="text" id="home" th:name="home" placeholder="дом"></input>
+                                </div>
+                                <div class="input-box">
+                                    <div>Квартира</div>
+                                    <input name="text" id="apartment" th:name="apartment" placeholder=""></input>
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                <div>Индекс*</div>
+                                <input type="number" name="text" id="index" th:name="index" placeholder="индекс"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blank_blocks_reg_button">
+                        <div class="input-box button">
+                            <input type="Submit" value="Зарегистрироваться">
+                        </div>
+                        <div class="text"> 
+                            <h3> <a href="login.html" th:href="@{/login}">Уже регистрировались?</a></h3>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="./script.js"></script>
 </body>
 
 </html>

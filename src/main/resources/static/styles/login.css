@@ -7,8 +7,10 @@
 }
 body{
   background: url(../img/intro-bg-2-blur.jpg) no-repeat center;
+  background-attachment: fixed;
+  background-size: cover;
   background-size: 115%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 ::selection{
   background: #1abd9c4d;
@@ -110,4 +112,38 @@ form .button input:hover{
 }
 form .signup-link a:hover{
   text-decoration: underline;
+}
+
+.or {
+    text-align: center;
+    margin-top: 20px;
+    color: #c2c2c2;
+}
+
+.vk{
+  color: #0077ff;
+  font-size: 35px;
+  text-decoration: none;
+  display: flex; 
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff7e;
+  -webkit-text-stroke:0.5px rgb(255, 255, 255);
+  margin: 10px 70px 0 70px;
+  border-radius: 5px 5px 5px 5px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.vk:hover{
+  border: 1px solid #0077ff;
+}
+
+.title_vk{
+  color: #0077ff;
+  font-size: 28px;
+  font-weight: bold;
+  /* text-decoration: none; */
+  margin-left: 10px;
+  -webkit-text-stroke:0.5px rgb(255, 255, 255);
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap'); */
 
 * {
     margin: 0;
@@ -8,37 +8,38 @@
 }
 
 body {
-    /* min-height: 100vh; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: url(../img/intro-bg-2-blur.jpg) no-repeat center;
-    background-size: 115%;
+    background-size: 120%;
 }
-.container{
-    max-width: 540px;
-    padding: 0 20px;
-    margin: 170px auto;
-  }
+
 
 .wrapper {
-    position: relative;
-    width: 100%;
     background: #ffffff38;
-    border-radius: 5px;
     box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
-    /* max-width: 430px;
-    width: 100%;
-    background: #ffffff38;
-    padding: 34px;
     border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
 }
 
-.wrapper h2 {
+.block_wrap{
+    margin-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.column{
+    width: 1000px;
+}
+
+
+.reg {
     height: 90px;
     background: #16a084b9;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px 0 0 0;
     color: #fff;
     font-size: 30px;
     font-weight: 600;
@@ -48,13 +49,29 @@ body {
 }
 
 .wrapper form {
-    /* margin-top: 30px; */
-    padding: 30px 25px 25px 25px;
+    padding: 15px;
+}
+.input-box-top input{
+    height: 40px;
+    margin-right: 10px;
+}
+
+form .input-box-top input {
+    width: 275px;
+    padding: 0 15px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #333;
+    border: 1.5px solid #16a084b9;
+    border-bottom-width: 2.5px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
 .wrapper form .input-box {
-    height: 52px;
-    margin: 18px 0;
+    height: 40px;
+    margin-top: 25px;
+    margin-right: 10px;
 }
 
 form .input-box input {
@@ -65,15 +82,95 @@ form .input-box input {
     font-size: 17px;
     font-weight: 400;
     color: #333;
-    border: 1.5px solid #C7BEBE;
+    border: 1.5px solid #16a084b9;
     border-bottom-width: 2.5px;
     border-radius: 6px;
     transition: all 0.3s ease;
+}
+.left_column{
+    margin-right: 10px;
+    width: 85%;
+}
+
+.right_column{
+    margin-left: 10px;
 }
 
 .input-box input:focus,
 .input-box input:valid {
     border-color: #16a084b9;
+}
+.address_bottom_block {
+    display: flex;
+  }
+.blank_blocks {
+    padding: 22px 30px 15px;
+    display: flex;
+    margin-top: -40px;
+    width: 100%;
+  }
+  .input-box-profile-photo{
+    margin-top: 30px;
+    display: inline-block;
+  }
+  .profile_photo_input{
+    position: relative;
+	display: inline-block;
+  }
+  .profile_photo_input span{
+    position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(255 255 255);
+	text-align: center; 
+	border-radius: 4px;
+	background-color: #16a084b9;
+	line-height: 22px;
+	height: 40px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border: none;
+	margin: 0;
+	transition: background-color 0.2s;
+  }
+
+  .profile_photo_input input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+
+.profile_photo_input input[type=file]:focus + span {
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.658);
+}
+
+.profile_photo_input:hover span {
+	background-color: #1fd8b3b9;
+}
+.profile_photo_input:active span {
+	background-color: #0f6e5bb9;
+}
+
+.profile_photo_input input[type=file]:disabled + span {
+	background-color: #eee;
+}
+
+  .blank_blocks_reg_button {
+    padding-left: 30px;
+    padding-right: 30px;
+    /* width: 100%; */
+  }
+
+.profile_photo_input{
+    height: 100%;
+    /* width: 500px; */
 }
 
 form .policy {
@@ -85,7 +182,7 @@ form h3 {
     color: #707070;
     font-size: 14px;
     font-weight: 500;
-    margin-left: 10px;
+    margin-top: 30px;
 }
 
 .input-box.button input {
@@ -103,6 +200,7 @@ form h3 {
 form .text h3 {
     color: #333;
     width: 100%;
+    font-size: 18px;
     text-align: center;
 }
 

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервис обмена книгами</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <header class="header_1">
+        <div class="wrapper">
+            <div class="header_wrapper">
+                <div class="header_logo">
+                    <a href="/" class="header_logo-link">
+                        <img src="img/svg/logo.svg" alt="Сервис обмена книгами" class="header_logo-pic">
+                    </a>
+                    <h1 class="title">Сервис обмена книгами</h1>
+                </div>
+                <nav th:if="${!isAuthorized}" class="header_nav">
+                    <ul class="header_list">
+                        <li class="header_item">
+                            <a href="login.html" th:href="@{/login}" class="header_link">Авторизация</a>
+                        </li>
+                        <li class="header_item">
+                            <a href="registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+    <header class="header">
+        <div class="wrapper">
+            <div class="header_wrapper_basic">
+                <div class="header_logo">
+                </div>
+                <nav class="header_nav_list">
+                    <ul class="header_list_basic">
+                        <a href="home.html" th:href="@{/home}" class="button_header_1">Главная</a>
+                        <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
+                        <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
+                        <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="go-trade">
+        <section class="main-trade">
+            <div class="trade_wrap">
+                <h2 class="blank_title">
+                    Бланк обмена
+                </h2>
+                <div class="blank_strokes">
+                    <a href="go_trade.html" class="get_blank_stroke_1">Хочу обменять</a>
+                    <a href="go_get.html" class="get_blank_stroke_2">Хочу получить</a>
+                    <a href="go_address.html" class="get_blank_stroke_3">Адрес доставки</a><!-- 
+                    <div class="blank_stroke">Хочу обменять</div>
+                    <div class="blank_stroke">Хочу получить</div>
+                    <div class="blank_stroke">Адрес доставки</div> -->
+                </div>
+                <div class="blank_blocks">
+                    <div class="get_column">
+                        <div class="category_title">Категории*</div>
+                        <ul class="tree">
+                            <li>
+                                <details>
+                                    <summary>Жанр</summary>
+                                    <ul>
+                                        <div>
+                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                            <label for="detective">Детектив</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="childrens_books" name="source"
+                                                value="childrens_books">
+                                            <label for="childrens_books">Детские книги</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="history" name="source" value="history">
+                                            <label for="history">История</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="memuars" name="source" value="memuars">
+                                            <label for="memuars">Мемуары</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="adventures" name="source" value="adventures">
+                                            <label for="adventures">Приключение</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="psychology" name="source" value="psychology">
+                                            <label for="psychology">Психология</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="fantastic" name="source" value="fantastic">
+                                            <label for="fantastic">Фантастика</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="esoterics" name="source" value="esoterics">
+                                            <label for="esoterics">Эзотерика</label>
+                                        </div>
+                                    </ul>
+                                </details>
+                                <details>
+                                    <summary>Область наук</summary>
+                                    <ul>
+                                        <div>
+                                            <input type="checkbox" id="technic" name="source" value="technic">
+                                            <label for="technic">Технические науки</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
+                                            <label for="linguistics">Языкознание</label>
+                                        </div>
+                                    </ul>
+                                </details>
+                                <details>
+                                    <summary>Состояние</summary>
+                                    <ul>
+                                        <div>
+                                            <input type="radio" id="new" name="condition" value="new">
+                                            <label for="new">Новое</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="good" name="condition" value="good">
+                                            <label for="good">Хорошее</label>
+                                        </div>
+                                    </ul>
+                                </details>
+                                <details>
+                                    <summary>Обложка</summary>
+                                    <ul>
+                                        <div>
+                                            <div><input type="radio" id="hard_cover" name="cover" value="hard_cover">
+                                                <label for="hard_cover">Твёрдая</label>
+                                            </div>
+                                            <div><input type="radio" id="soft_cover" name="cover" value="soft_cover">
+                                                <label for="soft_cover">Мягкая</label>
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </details>
+                                <details>
+                                    <summary>Лауреат</summary>
+                                    <ul>
+                                        <div>
+                                            <input type="checkbox" id="technic" name="source" value="technic">
+                                            <label for="technic">Технические науки</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
+                                            <label for="linguistics">Языкознание</label>
+                                        </div>
+                                    </ul>
+                                </details>
+                                <details>
+                                    <summary>Экранизация</summary>
+                                    <ul>
+                                        <div>
+                                            <input type="checkbox" id="technic" name="source" value="technic">
+                                            <label for="technic">Технические науки</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
+                                            <label for="linguistics">Языкознание</label>
+                                        </div>
+                                    </ul>
+                                </details>
+                                <details>
+                                    <summary>Язык издания</summary>
+                                    <ul>
+                                        <div>
+                                            <input type="checkbox" id="technic" name="source" value="technic">
+                                            <label for="technic">Технические науки</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
+                                            <label for="linguistics">Языкознание</label>
+                                        </div>
+                                    </ul>
+                                </details>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="get_buttons_column">
+                    <a href="go_trade.html" class="get_left_button">Назад</a>
+                    <a href="go_address.html" class="get_right_button">Далее</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

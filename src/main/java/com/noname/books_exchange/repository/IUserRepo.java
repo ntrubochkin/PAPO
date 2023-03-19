@@ -6,6 +6,6 @@ import com.noname.books_exchange.model.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
+public interface IUserRepo extends JpaRepository<User, Integer> {
     
 }
