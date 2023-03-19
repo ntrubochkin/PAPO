@@ -1,17 +1,20 @@
 package com.noname.books_exchange.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.noname.books_exchange.utils.ClientState;
 import com.noname.books_exchange.utils.PageAttributes;
+import com.noname.books_exchange.repository.UserRepo;
 
 @Controller
 public class DefaultController {
 
     private final ClientState clientState;
 
+    @Autowired
     public DefaultController(ClientState state) {
         clientState = state;
     }
