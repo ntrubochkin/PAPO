@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.noname.books_exchange.service.UserService;
 import com.noname.books_exchange.utils.ClientState;
+import com.noname.books_exchange.utils.EmailUtils;
 import com.noname.books_exchange.utils.RegexUtils;
 
 @Controller
@@ -43,7 +44,11 @@ public class WelcomeController {
         System.out.println(lastname);
         System.out.println(surname);
         System.out.println(email);
-        System.out.println(RegexUtils.validateEmail(email));
+        boolean emailIsValid = RegexUtils.validateEmail(email);
+        System.out.println(emailIsValid);
+        if(emailIsValid) {
+            EmailUtils.sendVerificationEmail(email);
+        }
         System.out.println(userName);
         System.out.println(password);
         System.out.println(RegexUtils.validatePassword(password));
