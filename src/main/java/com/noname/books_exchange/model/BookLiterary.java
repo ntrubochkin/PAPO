@@ -10,8 +10,8 @@ public class BookLiterary {
     @Column(name = "IdBookLiterary", nullable = false)
     private int idBookLiterary;
     @Basic
-    @Column(name = "IdAutor", nullable = false)
-    private int idAutor;
+    @Column(name = "IdAuthor", nullable = false)
+    private int idAuthor;
     @Basic
     @Column(name = "BookName", nullable = false, length = 50)
     private String bookName;
@@ -27,12 +27,12 @@ public class BookLiterary {
         this.idBookLiterary = idBookLiterary;
     }
 
-    public int getIdAutor() {
-        return idAutor;
+    public int getIdAuthor() {
+        return idAuthor;
     }
 
-    public void setIdAutor(int idAutor) {
-        this.idAutor = idAutor;
+    public void setIdAuthor(int idAuthor) {
+        this.idAuthor = idAuthor;
     }
 
     public String getBookName() {
@@ -59,7 +59,7 @@ public class BookLiterary {
         BookLiterary that = (BookLiterary) o;
 
         if (idBookLiterary != that.idBookLiterary) return false;
-        if (idAutor != that.idAutor) return false;
+        if (idAuthor != that.idAuthor) return false;
         if (bookName != null ? !bookName.equals(that.bookName) : that.bookName != null) return false;
         if (note != null ? !note.equals(that.note) : that.note != null) return false;
 
@@ -69,7 +69,7 @@ public class BookLiterary {
     @Override
     public int hashCode() {
         int result = idBookLiterary;
-        result = 31 * result + idAutor;
+        result = 31 * result + idAuthor;
         result = 31 * result + (bookName != null ? bookName.hashCode() : 0);
         result = 31 * result + (note != null ? note.hashCode() : 0);
         return result;

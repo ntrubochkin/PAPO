@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.noname.books_exchange.utils.ClientState;
 import com.noname.books_exchange.utils.PageAttributes;
-import com.noname.books_exchange.repository.UserRepo;
 
 @Controller
 public class DefaultController {

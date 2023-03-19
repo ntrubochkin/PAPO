@@ -8,7 +8,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "IdAuthor", nullable = false)
-    private int idAutor;
+    private int idAuthor;
     @Basic
     @Column(name = "LastName", nullable = false, length = 20)
     private String lastName;
@@ -16,12 +16,12 @@ public class Author {
     @Column(name = "FirstName", nullable = true, length = 50)
     private String firstName;
 
-    public int getIdAutor() {
-        return idAutor;
+    public int getIdAuthor() {
+        return idAuthor;
     }
 
-    public void setIdAutor(int idAutor) {
-        this.idAutor = idAutor;
+    public void setIdAuthor(int idAuthor) {
+        this.idAuthor = idAuthor;
     }
 
     public String getLastName() {
@@ -45,18 +45,18 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Author autor = (Author) o;
+        Author author = (Author) o;
 
-        if (idAutor != autor.idAutor) return false;
-        if (lastName != null ? !lastName.equals(autor.lastName) : autor.lastName != null) return false;
-        if (firstName != null ? !firstName.equals(autor.firstName) : autor.firstName != null) return false;
+        if (idAuthor != author.idAuthor) return false;
+        if (lastName != null ? !lastName.equals(author.lastName) : author.lastName != null) return false;
+        if (firstName != null ? !firstName.equals(author.firstName) : author.firstName != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = idAutor;
+        int result = idAuthor;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         return result;
