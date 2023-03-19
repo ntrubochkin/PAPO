@@ -62,4 +62,16 @@ public class DefaultController {
         model.addAttribute(PageAttributes.HOME_IS_ANON, clientState.loggedIn);
         return "aaq";
     }
+
+    @RequestMapping("/go_get")
+    public String goGet(Model model) {
+        model.addAttribute(PageAttributes.HOME_IS_ANON, clientState.loggedIn);
+        return "go_get";
+    }
+
+    @RequestMapping("/go_address")
+    public String goAddress(Model model) {
+        model.addAttribute(PageAttributes.HOME_IS_ANON, clientState.loggedIn);
+        return "go_address";
+    }
 }
