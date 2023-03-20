@@ -47,7 +47,11 @@ public class WelcomeController {
         boolean emailIsValid = RegexUtils.validateEmail(email);
         System.out.println(emailIsValid);
         if(emailIsValid) {
-            EmailUtils.sendVerificationEmail(email);
+            if(EmailUtils.sendVerificationEmail(email)) {
+
+            } else {
+                
+            }
         }
         System.out.println(userName);
         System.out.println(password);

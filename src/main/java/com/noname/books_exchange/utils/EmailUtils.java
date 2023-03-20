@@ -1,6 +1,8 @@
 package com.noname.books_exchange.utils;
 
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,6 +14,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.util.ResourceUtils;
 
 public final class EmailUtils {
 
@@ -20,11 +23,22 @@ public final class EmailUtils {
     private static final String PASSWORD = System.getenv("PAPO_GMAIL_PWD");
     //https://support.google.com/mail/answer/7104828?visit_id=638148291518798237-268929434&rd=3
     private static final String PORT = "587";
+    private static String verificationEmailTemplate;
 
-    public static final void sendVerificationEmail(String email) {
+    static {
+        String content = "WIP";
+        try {
+            File templateFile = ResourceUtils.getFile("classpath:templates/validationEmail.html");
+            content = Files.readString(templateFile.toPath());
+        } catch (IOException ioe) {
+
+        }
+        verificationEmailTemplate = content;
+    }
+
+    public static final boolean sendVerificationEmail(String email) {
         Properties props = System.getProperties();
         String subject = "Hello world";
-        String body = "bruh";
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", HOST);
         props.put("mail.smtp.user", USER_NAME);
@@ -47,9 +61,7 @@ public final class EmailUtils {
             message.setFrom(sender);
             message.addRecipient(Message.RecipientType.TO, recipient);
             message.setSubject(subject);
-            message.setText(body);
-            //TODO ответ html страничкой???
-            // message.setContent("", "text/html");
+            message.setContent(verificationEmailTemplate, "text/html");
             transport.connect(HOST, USER_NAME, PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
@@ -58,5 +70,6 @@ public final class EmailUtils {
         } catch (MessagingException me) {
             me.printStackTrace();
         }
+        return true;
     }
 }
