@@ -25,13 +25,13 @@ public class User {
     @Column(name = "LastName", nullable = false, length = 50)
     private String lastName;
     @Basic
-    @Column(name = "SecondName", nullable = true, length = 25)
-    private String secondName;
+    @Column(name = "SurName", nullable = true, length = 25)
+    private String surName;
     @Basic
-    @Column(name = "Email", nullable = false, length = 15)
+    @Column(name = "Email", nullable = false, length = 256)
     private String email;
     @Basic
-    @Column(name = "Password", nullable = false, length = 15)
+    @Column(name = "Password", nullable = false, length = 128)
     private String password;
     @Basic
     @Column(name = "Rating", nullable = false)
@@ -54,6 +54,19 @@ public class User {
     @Basic
     @Column(name = "UserName", nullable = false, length = 20)
     private String userName;
+
+    public User() { }
+
+    public User(String firstName, String lastName, String surName, String email, String password, byte[] avatar, String userName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.surName = surName;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.userName = userName;
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
     public int getIdUser() {
         return idUser;
@@ -79,12 +92,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getSurName() {
+        return surName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setSurName(String surname) {
+        this.surName = surname;
     }
 
     public String getEmail() {
@@ -173,7 +186,7 @@ public class User {
         if (isSuperAdmin != user.isSuperAdmin) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (secondName != null ? !secondName.equals(user.secondName) : user.secondName != null) return false;
+        if (surName != null ? !surName.equals(user.surName) : user.surName != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (createdAt != null ? !createdAt.equals(user.createdAt) : user.createdAt != null) return false;
@@ -188,7 +201,7 @@ public class User {
         int result = idUser;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
+        result = 31 * result + (surName != null ? surName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + rating;

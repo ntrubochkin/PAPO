@@ -1,26 +1,40 @@
 package com.noname.books_exchange.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.noname.books_exchange.model.User;
+import com.noname.books_exchange.service.UserAddressService;
 import com.noname.books_exchange.service.UserService;
+import com.noname.books_exchange.service.VerificationInfoService;
 import com.noname.books_exchange.utils.ClientState;
 import com.noname.books_exchange.utils.EmailUtils;
 import com.noname.books_exchange.utils.RegexUtils;
+import com.noname.books_exchange.utils.VerificationStringProvider;
 
 @Controller
 public class WelcomeController {
 
     private final ClientState clientState;
     private final UserService userService;
+    private final UserAddressService addressService;
+    private final VerificationInfoService verificationService;
 
     @Autowired
-    public WelcomeController(ClientState clientState, UserService userService) {
+    public WelcomeController(ClientState clientState,
+                             UserService userService,
+                             UserAddressService addressService,
+                             VerificationInfoService vService)
+    {
         this.clientState = clientState;
         this.userService = userService;
+        this.addressService = addressService;
+        verificationService = vService;
     }
 
     //TODO
@@ -40,34 +54,39 @@ public class WelcomeController {
                               @RequestParam(value = "apartment",          required = false) String apartmentNumber,
                               @RequestParam(value = "index",              required = false) Integer index)
     {
-        System.out.println(firstname);
-        System.out.println(lastname);
-        System.out.println(surname);
-        System.out.println(email);
-        boolean emailIsValid = RegexUtils.validateEmail(email);
-        System.out.println(emailIsValid);
-        if(emailIsValid) {
-            if(EmailUtils.sendVerificationEmail(email)) {
-
-            } else {
-                
+        if(!userService.isUserNameUnique(userName)) {
+            //TODO сообщение об ошибке
+        }
+        boolean pwdCheckResult = RegexUtils.validatePassword(password);
+        if(!pwdCheckResult) {
+            //TODO сообщение об ошибке
+        }
+        if(!password.equals(pwdConfirmStr)) {
+            //TODO сообщение об ошибке
+        }
+        if(!RegexUtils.validateEmail(email)) {
+            //TODO сообщение об ошибке
+        }
+        byte[] avatar = null;
+        if(avatarFile != null) {
+            try {
+                avatar = avatarFile.getBytes();
+            } catch (IOException ioe) {
+                //TODO
             }
         }
-        System.out.println(userName);
-        System.out.println(password);
-        System.out.println(RegexUtils.validatePassword(password));
-        System.out.println(pwdConfirmStr);
-        if(avatarFile != null)
-        {
-            System.out.println(avatarFile.getOriginalFilename());
+        User user = userService.createUser(firstname, lastname, surname, email, userName, password, avatar);
+        Integer id = user.getIdUser();
+        System.out.println(id);
+        addressService.createAddress(id, city, street, buildingNumber, homeNumber, apartmentNumber, index);
+        String randomString = VerificationStringProvider.getNextRandomString();
+        verificationService.createRow(id, randomString);
+        if(EmailUtils.sendVerificationEmail(email, userName, randomString)) {
+
+        } else {
+            
         }
-        System.out.println(city);
-        System.out.println(street);
-        System.out.println(buildingNumber);
-        System.out.println(homeNumber);
-        System.out.println(apartmentNumber);
-        System.out.println(index);
-        return "redirect:home";
+        return "redirect:login";
     }
 
     //TODO
@@ -75,10 +94,12 @@ public class WelcomeController {
     public String tryLogin(@RequestParam(value = "login",       required = true) String login,
                            @RequestParam(value = "password",    required = true) String password)
     {
-        System.out.println(login);
-        System.out.println(password);
-        boolean result = true;
-        clientState.loggedIn = result; 
-        return "redirect:home";
+        User user = userService.findUserByLoginData(login, password);
+        if(user != null) {
+            clientState.loggedIn = true; 
+            return "redirect:home";
+        }
+        //TODO сообщение об ошибке
+        return "login";
     }
 }
