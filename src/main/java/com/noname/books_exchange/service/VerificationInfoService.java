@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.noname.books_exchange.model.VerificationInfo;
 import com.noname.books_exchange.repository.IVerificationInfoRepo;
+import com.noname.books_exchange.utils.EmailUtils;
+import com.noname.books_exchange.utils.VerificationStringProvider;
 
 @Service
 public class VerificationInfoService {
@@ -20,9 +22,10 @@ public class VerificationInfoService {
         repository = repo;
     }
 
-    public void createRow(Integer id, String genStr) {
+    public VerificationInfo createRow(Integer id, String genStr) {
         VerificationInfo info = new VerificationInfo(id, genStr);
-        repository.save(info);
+        info = repository.save(info);
+        return info;
     }
 
     public VerificationInfo findByGeneratedString(String searchStr) {
@@ -33,11 +36,19 @@ public class VerificationInfoService {
             long difference = info.getGeneratedAt().getTime() - System.currentTimeMillis();
             if(difference < THIRTY_MINUTES_MS) {
                 result = info;
+            } else {
+                deleteRow(info);
             }
         } catch(NoSuchElementException nsee) {
             //TODO
         }
         return result;
+    }
+
+    public boolean sendVerificationEmail(int id, String email, String userName) {
+        String randomString = VerificationStringProvider.getNextRandomString();
+        VerificationInfo info = createRow(id, randomString);
+        return EmailUtils.sendVerificationEmail(email, userName, randomString);
     }
 
     public void deleteRow(VerificationInfo row) {

@@ -13,9 +13,7 @@ import com.noname.books_exchange.service.UserAddressService;
 import com.noname.books_exchange.service.UserService;
 import com.noname.books_exchange.service.VerificationInfoService;
 import com.noname.books_exchange.utils.ClientState;
-import com.noname.books_exchange.utils.EmailUtils;
 import com.noname.books_exchange.utils.RegexUtils;
-import com.noname.books_exchange.utils.VerificationStringProvider;
 
 @Controller
 public class WelcomeController {
@@ -77,14 +75,12 @@ public class WelcomeController {
         }
         User user = userService.createUser(firstname, lastname, surname, email, userName, password, avatar);
         Integer id = user.getIdUser();
-        System.out.println(id);
         addressService.createAddress(id, city, street, buildingNumber, homeNumber, apartmentNumber, index);
-        String randomString = VerificationStringProvider.getNextRandomString();
-        verificationService.createRow(id, randomString);
-        if(EmailUtils.sendVerificationEmail(email, userName, randomString)) {
+        boolean emailSent = verificationService.sendVerificationEmail(id, email, userName);
+        if(emailSent) {
 
         } else {
-            
+
         }
         return "redirect:login";
     }

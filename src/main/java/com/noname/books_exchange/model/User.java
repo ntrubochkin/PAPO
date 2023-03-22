@@ -57,6 +57,17 @@ public class User {
 
     public User() { }
 
+    //VK constructor
+    public User(String firstName, String lastName, String email, byte[] avatar, String userName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.avatar = avatar;
+        this.userName = userName;
+        this.password = "hehehehe";
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
+
     public User(String firstName, String lastName, String surName, String email, String password, byte[] avatar, String userName) {
         this.firstName = firstName;
         this.lastName = lastName;

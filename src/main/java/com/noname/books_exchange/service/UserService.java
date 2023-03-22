@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,13 +45,21 @@ public class UserService {
         userRepository.enableUser(id);
     }
 
+    public User findUserByUserName(String username) {
+        Optional<User> optional = userRepository.findUserByUserName(username);
+        try {
+            return optional.get();
+        } catch(NoSuchElementException nsee) {
+            return null;
+        }
+    }
+
     public User findUserByLoginData(String username, String password) {
         Optional<User> optional = userRepository.findUserByUserName(username);
         User result = null;
         try {
             User user = optional.get();
             boolean matchResult = pwdEncoder.matches(password, user.getPassword());
-            System.out.println(matchResult);
             if(matchResult) {
                 result = user;
             }
@@ -58,5 +67,21 @@ public class UserService {
             //TODO
         }
         return result;
+    }
+
+    public Pair<User, Boolean> handleVKontakteAuth(String firstname,
+                                    String lastname,
+                                    String email,
+                                    String username,
+                                    byte[] avatar)
+    {
+        User user = findUserByUserName(username);
+        Boolean emailNeeded = false;
+        if(user == null) {
+            user = new User(firstname, lastname, email, avatar, username);
+            user = userRepository.save(user);
+            emailNeeded = true;
+        }
+        return Pair.of(user, emailNeeded);
     }
 }
