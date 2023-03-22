@@ -6,14 +6,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.noname.books_exchange.model.User;
 import com.noname.books_exchange.service.UserService;
@@ -42,7 +47,8 @@ public class VKontakteController {
     }
 
     @PostMapping("/eat-data")
-    public String vkLogin(@RequestParam(value = "email") String email,
+    @ResponseBody
+    public HashMap<String, String> vkLogin(@RequestParam(value = "email") String email,
                           @RequestParam(value = "firstName") String firstName,
                           @RequestParam(value = "lastName") String lastName,
                           @RequestParam(value = "hasAvatar") String hasAvatarStr,
@@ -83,6 +89,8 @@ public class VKontakteController {
         }
         //TODO
         clientState.loggedIn = true;
-        return "redirect:home";
+        HashMap<String, String> response = new HashMap<String, String>();
+        response.put("created", "ok");
+        return response;
     }
 }

@@ -83,8 +83,17 @@ async function APICallback(result) {
 async function sendToServer(data) {
     let params = buildURLParams(data, true);
     let response = await fetch(`http://localhost:8080/oauth/vk/eat-data?${params}`, {
-        method: "post"
+        method: "post",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
     });
     let json = await response.json();
+    if(json["created"] === "ok") {
+        window.location.replace("http://localhost:8080/home");
+    } else {
+
+    }
     //TODO
 }
