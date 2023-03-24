@@ -1,23 +1,13 @@
 package com.noname.books_exchange.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class UserList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdUserList", nullable = false)
     private int idUserList;
-    @Basic
-    @Column(name = "TypeList", nullable = false)
     private int typeList;
-    @Basic
-    @Column(name = "IdList", nullable = false)
     private int idList;
 
     public int getIdUserList() {

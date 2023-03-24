@@ -1,22 +1,12 @@
 package com.noname.books_exchange.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = " Status", schema = "public", catalog = "book_exchange")
 public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdStatus", nullable = false)
     private int idStatus;
-    @Basic
-    @Column(name = "Name", nullable = true, length = 10)
     private String name;
 
     public int getIdStatus() {

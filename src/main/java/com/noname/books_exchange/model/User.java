@@ -3,68 +3,25 @@ package com.noname.books_exchange.model;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "DearUser")
+@Table(name = "user_info")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdUser", nullable = false)
     private int idUser;
-
-    @Basic
-    @Column(name = "FirstName", nullable = false, length = 25)
     private String firstName;
-
-    @Basic
-    @Column(name = "LastName", nullable = false, length = 50)
     private String lastName;
-
-    @Basic
-    @Column(name = "SurName", nullable = true, length = 25)
     private String surName;
-
-    @Basic
-    @Column(name = "Email", nullable = false, length = 256)
     private String email;
-
-    @Basic
-    @Column(name = "Password", nullable = false, length = 128)
     private String password;
-
-    @Basic
-    @Column(name = "Rating", nullable = false)
     private int rating;
-
-    @Basic
-    @Column(name = "CreatedAt", nullable = false)
     private Timestamp createdAt;
-
-    @Basic
-    @Column(name = "Enabled", nullable = false)
     private boolean enabled;
-
-    @Basic
-    @Column(name = "Avatar", nullable = true)
     private byte[] avatar;
-
-    @Basic
-    @Column(name = "IsStaff", nullable = false)
     private boolean isStaff;
-
-    @Basic
-    @Column(name = "IsSuperAdmin", nullable = false)
     private boolean isSuperAdmin;
-
-    @Basic
-    @Column(name = "UserName", nullable = false, length = 20)
     private String userName;
 
     public User() { }

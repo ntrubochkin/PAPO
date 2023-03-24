@@ -3,39 +3,19 @@ package com.noname.books_exchange.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class OfferList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdOfferList", nullable = false)
     private int idOfferList;
-    @Basic
-    @Column(name = "IdBookLiterary", nullable = false)
     private int idBookLiterary;
-    @Basic
-    @Column(name = "IdUser", nullable = false)
     private int idUser;
-    @Basic
-    @Column(name = "ISBN", nullable = true, length = 13)
     private String isbn;
-    @Basic
-    @Column(name = "YearPublishing", nullable = false)
     private Date yearPublishing;
-    @Basic
-    @Column(name = "CreateAt", nullable = false)
     private Timestamp createAt;
-    @Basic
-    @Column(name = "UpdateAt", nullable = false)
     private Timestamp updateAt;
-    @Basic
-    @Column(name = "IdStatus", nullable = false)
     private int idStatus;
 
     public int getIdOfferList() {

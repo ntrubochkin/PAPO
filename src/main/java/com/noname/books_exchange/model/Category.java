@@ -1,26 +1,14 @@
 package com.noname.books_exchange.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdCategory", nullable = false)
     private int idCategory;
-    @Basic
-    @Column(name = "Name", nullable = false, length = 25)
     private String name;
-    @Basic
-    @Column(name = "IdParent", nullable = true)
     private Integer idParent;
-    @Basic
-    @Column(name = "MultiSelect", nullable = false)
     private boolean multiSelect;
 
     public int getIdCategory() {

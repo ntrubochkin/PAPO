@@ -2,33 +2,17 @@ package com.noname.books_exchange.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class BookResponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdBookResponse", nullable = false)
     private int idBookResponse;
-    @Basic
-    @Column(name = "IdBookLiterary", nullable = false)
     private int idBookLiterary;
-    @Basic
-    @Column(name = "IdUser", nullable = false)
     private int idUser;
-    @Basic
-    @Column(name = "CreateAt", nullable = false)
     private Timestamp createAt;
-    @Basic
-    @Column(name = "Response", nullable = false, length = 500)
     private String response;
-    @Basic
-    @Column(name = "Note", nullable = true, length = 50)
     private String note;
 
     public int getIdBookResponse() {

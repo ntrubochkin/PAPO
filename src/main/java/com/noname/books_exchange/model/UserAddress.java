@@ -1,43 +1,19 @@
 package com.noname.books_exchange.model;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "UserAddress")
 public class UserAddress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdUserAddress", nullable = false)
     private int idUserAddress;
-    @Basic
-    @Column(name = "IdUser", nullable = false)
     private int idUser;
-    @Basic
-    @Column(name = "AddrIndex", nullable = false, length = 6)
     private String addrIndex;
-    @Basic
-    @Column(name = "AddrCity", nullable = false, length = 15)
     private String addrCity;
-    @Basic
-    @Column(name = "AddrStreet", nullable = false, length = 25)
     private String addrStreet;
-    @Basic
-    @Column(name = "AddrHouse", nullable = false, length = 5)
     private String addrHouse;
-    @Basic
-    @Column(name = "AddrStructure", nullable = true, length = 10)
     private String addrStructure;
-    @Basic
-    @Column(name = "AddrApart", nullable = true, length = 3)
     private String addrApart;
-    @Basic
-    @Column(name = "IsDefault ", nullable = false)
     private boolean isDefault;
 
     public UserAddress(int idUser, String addrIndex, String addrCity, String addrStreet, String addrHouse, String addrStructure, String addrApart) {
@@ -48,6 +24,10 @@ public class UserAddress {
         this.addrHouse = addrHouse;
         this.addrStructure = addrStructure;
         this.addrApart = addrApart;
+    }
+
+    public UserAddress() {
+
     }
 
     public int getIdUserAddress() {

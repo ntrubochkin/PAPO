@@ -2,36 +2,18 @@ package com.noname.books_exchange.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ExchangeList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdExchangeList ", nullable = false)
     private int idExchangeList;
-    @Basic
-    @Column(name = "IdOfferList1", nullable = false)
     private int idOfferList1;
-    @Basic
-    @Column(name = "IdWishList1", nullable = false)
     private int idWishList1;
-    @Basic
-    @Column(name = "IdOfferList2", nullable = false)
     private int idOfferList2;
-    @Basic
-    @Column(name = "IdWishList2", nullable = false)
     private int idWishList2;
-    @Basic
-    @Column(name = "CreateAt", nullable = false)
     private Timestamp createAt;
-    @Basic
-    @Column(name = "IsBoth", nullable = false)
     private boolean isBoth;
 
     public int getIdExchangeList() {

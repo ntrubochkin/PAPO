@@ -2,35 +2,17 @@ package com.noname.books_exchange.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table
 public class WishList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "IdWishList", nullable = false)
     private int idWishList;
-    @Basic
-    @Column(name = "IdUser", nullable = false)
     private int idUser;
-    @Basic
-    @Column(name = "CreateAt", nullable = false)
     private Timestamp createAt;
-    @Basic
-    @Column(name = "UpdateAt", nullable = false)
     private Timestamp updateAt;
-    @Basic
-    @Column(name = "IdStatus", nullable = false)
     private int idStatus;
-    @Basic
-    @Column(name = "IdUserAddress", nullable = false)
     private int idUserAddress;
 
     public int getIdWishList() {
