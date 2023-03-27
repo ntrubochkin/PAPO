@@ -21,10 +21,10 @@
                 <nav th:if="${!isAuthorized}" class="header_nav">
                     <ul class="header_list">
                         <li class="header_item">
-                            <a href="login.html" th:href="@{/login}" class="header_link">Авторизация</a>
+                            <a href="./login.html" th:href="@{/login}" class="header_link">Авторизация</a>
                         </li>
                         <li class="header_item">
-                            <a href="registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
+                            <a href="./registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
                         </li>
                     </ul>
                 </nav>
@@ -43,6 +43,7 @@
                         <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
                         <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
                         <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
+                    </ul>
                 </nav>
             </div>
         </div>

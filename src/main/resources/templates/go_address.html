@@ -22,10 +22,10 @@
                 <nav th:if="${!isAuthorized}" class="header_nav">
                     <ul class="header_list">
                         <li class="header_item">
-                            <a href="login.html" th:href="@{/login}" class="header_link">Авторизация</a>
+                            <a href="./login.html" th:href="@{/login}" class="header_link">Авторизация</a>
                         </li>
                         <li class="header_item">
-                            <a href="registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
+                            <a href="./registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
                         </li>
                     </ul>
                 </nav>
@@ -56,10 +56,9 @@
                     Бланк обмена
                 </h2>
                 <div class="blank_strokes">
-                    <a href="go_trade.html" th:href="@{/go_trade}" class="trade_blank_stroke_1">Хочу обменять</a>
-                    <a href="go_get.html" th:href="@{/go_get}" class="trade_blank_stroke_2">Хочу получить</a>
-                    <a href="go_address.html" th:href="@{/go_address}" class="trade_blank_stroke_3">Адрес доставки</a>
-                    <!-- 
+                    <a href="go_trade.html" th:href="@{/go_trade}" class="address_blank_stroke_1">Хочу обменять</a>
+                    <a href="go_get.html" th:href="@{/go_get}" class="address_blank_stroke_2">Хочу получить</a>
+                    <a href="go_address.html" th:href="@{/go_address}" class="address_blank_stroke_3">Адрес доставки</a><!-- 
                     <div class="blank_stroke">Хочу обменять</div>
                     <div class="blank_stroke">Хочу получить</div>
                     <div class="blank_stroke">Адрес доставки</div> -->
@@ -99,7 +98,7 @@
                         <input name="text" id="first_name" placeholder="Иван"></input>
                         <div>Отчество(при наличии)</div>
                         <input name="text" id="surname" placeholder="Иванович"></input>
-                        
+
                     </div>
                 </div>
                 <div class="address_buttons_column">

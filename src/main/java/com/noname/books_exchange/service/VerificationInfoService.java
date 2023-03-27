@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.noname.books_exchange.model.VerificationInfo;
 import com.noname.books_exchange.repository.IVerificationInfoRepo;
 import com.noname.books_exchange.utils.EmailUtils;
-import com.noname.books_exchange.utils.VerificationStringProvider;
+import com.noname.books_exchange.utils.SecureStringProvider;
 
 @Service
 public class VerificationInfoService {
@@ -46,7 +46,7 @@ public class VerificationInfoService {
     }
 
     public boolean sendVerificationEmail(int id, String email, String userName) {
-        String randomString = VerificationStringProvider.getNextRandomString();
+        String randomString = SecureStringProvider.getVerificationKey();
         VerificationInfo info = createRow(id, randomString);
         return EmailUtils.sendVerificationEmail(email, userName, randomString);
     }

@@ -18,8 +18,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.util.ResourceUtils;
-
 public final class EmailUtils {
 
     private static final String HOST = "smtp.gmail.com";
@@ -33,13 +31,12 @@ public final class EmailUtils {
     static {
         String content = "Привет, %UwU%. Перейди по ссылке, чтобы завершить регистрацию: http://localhost:8080/verification/%OwO%";
         try {
-            File templateFile = ResourceUtils.getFile("classpath:misc/validationEmail.html");
+            File templateFile = GeneralUtils.getResourceFile("validationEmail.html");
             content = Files.readString(templateFile.toPath());
         } catch (IOException ioe) {
 
         }
         verificationEmailTemplate = content;
-
         sendProperties = System.getProperties();
         sendProperties.put("mail.smtp.starttls.enable", "true");
         sendProperties.put("mail.smtp.host", HOST);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Сервис обмена книгами</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
     <header class="header_1">
         <div class="wrapper">
@@ -17,41 +19,300 @@
                     </a>
                     <h1 class="title">Сервис обмена книгами</h1>
                 </div>
-                <nav th:if="${!isAuthorized}" class="header_nav">
-                    <ul class="header_list">
-                        <li class="header_item">
-                            <a href="login.html" th:href="@{/login}" class="header_link">Авторизация</a>
-                        </li>
-                        <li class="header_item">
-                            <a href="registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
-                        </li>
-                    </ul>
+                <nav class="header_nav">
+                    <a href="#" class="profile_card_nav">
+                        <div>
+                            <img th:src="${b64uAvatar}" alt="" id="imageprofile" class="image_profile">
+                        </div>
+                        <div>
+                            <div class="username" id="userName" th:text="${uName}">Смелый заяц</div>
+                            <div class="rating" id="rating" th:text="Рейтинг + ' ' + ${uRating}">Рейтинг 2</div>
+                        </div>
+
+                    </a>
                 </nav>
-                
-            </div>            
+
+            </div>
         </div>
     </header>
     <header class="header">
         <div class="wrapper">
             <div class="header_wrapper_basic">
-                <div class="header_logo">   
+                <div class="header_logo">
                 </div>
-                    <nav class="header_nav_list">
-                        <ul class="header_list_basic">
-                            <a href="home.html" th:href="@{/home}" class="button_header_1">Главная</a>
-                            <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
-                            <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
-                            <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
-                        </ul>
-                    </nav>
-            </div>            
+                <nav class="header_nav_list">
+                    <ul class="header_list_basic">
+                        <a href="home.html" th:href="@{/home}" class="button_header_1">Главная</a>
+                        <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
+                        <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
+                        <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
-    <main class="trade">
-        <div class="main-trade">
-            
+    <div class="content">
+        <div class="tabs">
+            <nav class="tabs_items">
+                <a href="#" class="profile_card">
+                    <div>
+                        <img th:src="${b64uAvatar}" alt="" id="imageprofile" class="image_profile">
+                    </div>
+                    <div>
+                        <div class="username" id="userName" th:text="${uName}">Смелый заяц</div>
+                        <div class="rating" id="rating" th:text="Рейтинг + ' ' + ${uRating}">Рейтинг 2</div>
+                    </div>
+
+                </a>
+                <a href="#tab_01" class="tab_item">Предложения для обмена</a>
+                <a href="#tab_02" class="tab_item">Хочу обменять</a>
+                <a href="#tab_03" class="tab_item">Хочу получить</a>
+                <a href="#tab_04" class="tab_item">Активные обмены</a>
+                <a href="#tab_05" class="tab_item">Отзывы на книги</a>
+                <a href="#tab_06" class="tab_item">Личные данные</a>
+                <a href="#tab_07" class="tab_item">Сообщения</a>
+                <a href="#tab_08" class="tab_item">Архив</a>
+                <a href="#tab_09" class="tab_item">Выход</a>
+            </nav>
+            <div class="tabs_body">
+                <div id="tab_01" class="tabs_block">
+                    <div class="card_content">
+                        <div class="book_match" id="book_match">Полное совпадение</div>
+                        <div class="element_wrap">
+                            <div class="element_block">
+                                <div class="element">
+                                    <div id="book_title">Золотая рыба</div>
+                                    <div id="city">Самара</div>
+                                    <div id="rating">рейтинг 0</div>
+                                </div>
+                            </div>
+                            <div class="element_block">
+                                <div class="element">
+                                    <div id="book_title">Веселый перец</div>
+                                    <div id="city">Хабаровск</div>
+                                    <div id="rating">рейтинг 1</div>
+                                </div>
+                            </div>
+                            <div class="details_button">Подробнее</div>
+                            <div class="dropdown_content">
+                                <div>Карточка обмена</div>
+                                <div class="card_wrap">
+                                    <div class="confirm_card">
+                                        <div class="top_card">
+                                            <div>Мне</div>
+                                            <div class="last_name" id="last_name"></div>
+                                            <div class="first_name" id="first_name"></div>
+                                            <div class="book_title" id="book_title"></div>
+                                            <div class="genre" id="genre">Фантастика</div>
+                                            <div class="year_book" id="year_book"></div>
+                                        </div>
+                                        <div class="confirmation" id="confirm">Обмен подтвержден</div>
+                                    </div>
+                                    <div class="confirm_card">
+                                        <div class="top_card">
+                                            <div>Я</div>
+                                            <div class="author">
+                                                <div class="last_name" id="last_name">Булгаков</div>
+                                                <div class="first_name" id="first_name">М.</div>
+                                            </div>
+                                            <div class="book_title" id="book_title">Мастер и Маргарита</div>
+                                            <div class="genre" id="genre">2005г. изд.</div>
+                                            <div class="year_book" id="year_book"></div>
+                                        </div>
+                                        <button class="confirm_button" type="button"
+                                            id="confirm_button">Подтвердить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="book_match" id="book_match">Частичное совпадение</div>
+                    <div class="element_wrap">
+                        <div class="element_block">
+                            <div class="element">
+                                <div id="book_title">Золотая рыба</div>
+                                <div id="city">Самара</div>
+                                <div id="rating">рейтинг 0</div>
+                            </div>
+                        </div>
+                        <div class="element_block">
+                            <div class="element">
+                                <div id="book_title">Веселый перец</div>
+                                <div id="city">Хабаровск</div>
+                                <div id="rating">рейтинг 1</div>
+                            </div>
+                            <div class="details_button">Подробнее</div>
+                            <div class="dropdown_content">
+                                <div>Карточка обмена</div>
+                                <div class="card_wrap">
+                                    <div class="confirm_card">
+                                        <div class="top_card">
+                                            <div>Мне</div>
+                                            <div class="last_name" id="last_name"></div>
+                                            <div class="first_name" id="first_name"></div>
+                                            <div class="book_title" id="book_title"></div>
+                                            <div class="genre" id="genre">Фантастика</div>
+                                            <div class="year_book" id="year_book"></div>
+                                        </div>
+                                        <div class="confirmation" id="confirm">Обмен подтвержден</div>
+                                    </div>
+                                    <div class="confirm_card">
+                                        <div class="top_card">
+                                            <div>Я</div>
+                                            <div class="last_name" id="last_name">Булгаков</div>
+                                            <div class="first_name" id="first_name">Михаил</div>
+                                            <div class="book_title" id="book_title">Мастер и Маргарита</div>
+                                            <div class="genre" id="genre">2005г. изд.</div>
+                                            <div class="year_book" id="year_book"></div>
+                                        </div>
+                                        <button class="confirm_button" type="button"
+                                            id="confirm_button">Подтвердить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="book_match" id="book_match">Другие интересные предложения</div>
+                    <div class="element_wrap">
+                        <div class="element_block">
+                            <div class="element">
+                                <div id="book_title">Золотая рыба</div>
+                                <div id="city">Самара</div>
+                                <div id="rating">рейтинг 0</div>
+                            </div>
+                        </div>
+                        <div class="element_block">
+                            <div class="element">
+                                <div id="book_title">Веселый перец</div>
+                                <div id="city">Хабаровск</div>
+                                <div id="rating">рейтинг 1</div>
+                            </div>
+                            <div class="details_button">Подробнее</div>
+                            <div class="dropdown_content">
+                                <div>Карточка обмена</div>
+                                <div class="card_wrap">
+                                    <div class="confirm_card">
+                                        <div class="top_card">
+                                            <div>Мне</div>
+                                            <div class="last_name" id="last_name"></div>
+                                            <div class="first_name" id="first_name"></div>
+                                            <div class="book_title" id="book_title"></div>
+                                            <div class="genre" id="genre">Фантастика</div>
+                                            <div class="year_book" id="year_book"></div>
+                                        </div>
+                                        <div class="confirmation" id="confirm">Обмен подтвержден</div>
+                                    </div>
+                                    <div class="confirm_card">
+                                        <div class="top_card">
+                                            <div>Я</div>
+                                            <div class="last_name" id="last_name">Булгаков</div>
+                                            <div class="first_name" id="first_name">Михаил</div>
+                                            <div class="book_title" id="book_title">Мастер и Маргарита</div>
+                                            <div class="genre" id="genre">2005г. изд.</div>
+                                            <div class="year_book" id="year_book"></div>
+                                        </div>
+                                        <button class="confirm_button" type="button"
+                                            id="confirm_button">Подтвердить</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab_02" class="tabs_block">
+                    <div class="element_wrap">
+                        <div class="element_block">
+                            <div class="element">
+                                <div id="book_title">Эркюл Пуаро</div>
+                                <div class="author">
+                                    <div id="first_name">Агата</div>
+                                    <div id="last_name">Кристи</div>
+                                </div>
+                                <div id="genre">Роман, Детектив</div>
+                                <div id="year_book">1938г.</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="tab_03" class="tabs_block">
+                    Lorem ipsum dolor sit ametasd adasdasdasdasdas,qweqweqwewqeqwe
+                </div>
+                <div id="tab_04" class="tabs_block">
+                    Lorem ipsum dolor sit ametasd adasdasdasdasdas,qasdasdasdasdas
+                </div>
+                <div id="tab_05" class="tabs_block">
+                    Lorem ipsum dolor sit ametasd adasdasdasdasdas,d111111111111111
+                </div>
+                <div id="tab_06" class="tabs_block">
+                    Lorem ipsum dolor sit ametasd adasdasdasdasdas,1232222222222222
+                </div>
+                <div id="tab_07" class="tabs_block">
+                    Lorem ipsum dolor sit ametasd adasdasdasdasdas,sad asdadasdasd
+                </div>
+                <div id="tab_08" class="tabs_block">
+                    Lorem ipsum dolor sit ametasd adasdasdasdasdas,sadasda dasd as
+                </div>
+                <div id="tab_09" class="tabs_block">
+                </div>
+            </div>
+
         </div>
-    </main>
+    </div>
+    <!-- <script>
+        document.querySelectorAll('.details_button').forEach((el) => {
+            el.addEventListener('click', () => {
+                let dropdown_content = el.nextElementSibling;
+
+                if (dropdown_content.style.maxHeight) {
+                    document.querySelectorAll('dropdown_content').forEach((el) => el.style.maxHeight = null)
+                }else {
+                    document.querySelectorAll('dropdown_content').forEach((el) => el.style.maxHeight = null)
+                    dropdown_content.style.maxHeight = dropdown_content.scrollHeight + 'px'
+                }
+            })
+        })
+    </script> -->
+    <script>
+        var acc = document.getElementsByClassName("details_button");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdown_content = this.nextElementSibling;
+                if (dropdown_content.style.maxHeight) {
+                    dropdown_content.style.maxHeight = null;
+                } else {
+                    dropdown_content.style.maxHeight = dropdown_content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+    <!-- <main class="my_trades">
+        <div class="my_trades_left">
+            <div class="profile_elements">Предложения для обмена</div>
+            <div class="profile_elements">Хочу обменять</div>
+            <div class="profile_elements">Хочу получить</div>
+            <div class="profile_elements">Активные обмены</div>
+            <div class="profile_elements">Отзывы на книги</div>
+            <div class="profile_elements">Личные данные</div>
+            <div class="profile_elements">Сообщения</div>
+            <div class="profile_elements">Архив</div>
+            <div class="profile_elements">Выход</div>
+        </div>
+        <div class="my_trades_right">
+            <div class="book match">
+                
+            </div>
+        </div>
+    </main> -->
 </body>
+
 </html>

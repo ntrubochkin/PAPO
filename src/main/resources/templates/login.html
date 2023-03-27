@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -28,13 +28,15 @@
         <div class="or">
           <span>Или зайдите с помощю</span>
         </div>
-        <a href="https://oauth.vk.com/authorize?client_id=51588292&redirect_uri=http://localhost:8080/oauth/vk/&display=page&scope=wall,email&response_type=token&v=5.131" target="_blank" id="vk_login" class="vk">
+        <a href="https://oauth.vk.com/authorize?client_id=51588292&redirect_uri=http://localhost:8080/oauth/vk/&display=page&scope=wall,email&response_type=token&v=5.131"
+          id="vk_login" class="vk">
           <i class="fa-brands fa-vk"></i>
           <div class="title_vk">
             Вконтакте
           </div>
         </a>
-        <div class="signup-link"><a href="registration.html" th:href="@{/registration}">Ещё не зарегистрированы?</a></div>
+        <div class="signup-link"><a href="/registration.html" th:href="@{/registration}">Ещё не зарегистрированы?</a>
+        </div>
       </form>
 
     </div>

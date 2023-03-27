@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Сервис обмена книгами</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
     <header class="header_1">
         <div class="wrapper">
@@ -20,34 +22,34 @@
                 <nav th:if="${!isAuthorized}" class="header_nav">
                     <ul class="header_list">
                         <li class="header_item">
-                            <a href="login.html" th:href="@{/login}" class="header_link">Авторизация</a>
+                            <a href="./login.html" th:href="@{/login}" class="header_link">Авторизация</a>
                         </li>
                         <li class="header_item">
-                            <a href="registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
+                            <a href="./registration.html" th:href="@{/registration}" class="header_link">Регистрация</a>
                         </li>
                     </ul>
                 </nav>
-                
-            </div>            
+
+            </div>
         </div>
     </header>
     <header class="header">
         <div class="wrapper">
             <div class="header_wrapper_basic">
-                <div class="header_logo">   
+                <div class="header_logo">
                 </div>
-                    <nav class="header_nav_list">
-                        <ul class="header_list_basic">
-                            <a href="home.html" th:href="@{/home}" class="button_header_1">Главная</a>
-                            <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
-                            <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
-                            <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
-                            <!-- <button type="submit" class="button_header_1">Главная</button>
+                <nav class="header_nav_list">
+                    <ul class="header_list_basic">
+                        <a href="home.html" th:href="@{/home}" class="button_header_1">Главная</a>
+                        <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
+                        <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
+                        <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
+                        <!-- <button type="submit" class="button_header_1">Главная</button>
                             <button type="submit" class="button_header_2">Начать обмен</button>
                             <button type="submit" class="button_header_3">Мои обмены</button>
                             <button type="submit" class="button_header_4">Задать вопрос</button> -->
-                    </nav>
-            </div>            
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -62,4 +64,5 @@
         </div>
     </main>
 </body>
+
 </html>

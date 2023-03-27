@@ -10,21 +10,19 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.noname.books_exchange.model.User;
 import com.noname.books_exchange.service.UserService;
 import com.noname.books_exchange.service.VerificationInfoService;
 import com.noname.books_exchange.utils.ClientState;
 import com.noname.books_exchange.utils.GeneralUtils;
+import com.noname.books_exchange.utils.Triplet;
 
 //https://dev.vk.com/reference/versions
 @Controller
@@ -56,14 +54,17 @@ public class VKontakteController {
                           @RequestParam(value = "userName") String userName)
     {
         byte[] avatar = null;
+        String avatarType = "";
         boolean hasAvatar = hasAvatarStr.equals("1");
         if(hasAvatar) {
-            int length = 1024 * 1024 * 5;
             try {
                 URL url = new URL(avatarURL);
-                int size = GeneralUtils.getImageSizeFromURL(url); //Bruh
+                Pair<Integer, String> imgInfo = GeneralUtils.getVKAvatarInfo(url);
+                int size = imgInfo.getFirst();
+                avatarType = imgInfo.getSecond();
                 if(size == -1) {
-                    size = length;
+                    size = GeneralUtils.MAX_FILE_UPLOAD_SIZE;
+                    avatarType = ""; //TODO !!!
                 }
                 InputStream stream = new BufferedInputStream(url.openStream());
                 ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
@@ -81,14 +82,15 @@ public class VKontakteController {
                 //TODO
             }
         }
-        Pair<User, Boolean> vkResult =
-            userService.handleVKontakteAuth(firstName, lastName, email, userName, avatar);
-        User user = vkResult.getFirst();
-        if(vkResult.getSecond()) {
+        Triplet<User, Boolean, String> vkResult =
+            userService.handleVKontakteAuth(firstName, lastName, email, userName, avatar, avatarType);
+        User user = vkResult.first;
+        if(vkResult.second) {
+            //TODO
             vService.sendVerificationEmail(user.getIdUser(), email, userName);
         }
+        clientState.login(user);
         //TODO
-        clientState.loggedIn = true;
         HashMap<String, String> response = new HashMap<String, String>();
         response.put("created", "ok");
         return response;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -13,46 +13,96 @@
             <div class="column">
                 <h2 class="reg">Регистрация</h2>
                 <form th:action="@{/registration-attempt}" method="post" enctype="multipart/form-data">
+                    <div class="notify">Что то у вас не правильно!</div>
                     <div class="block_wrap">
                         <div class="input-box-top">
                             <div>Имя</div>
-                            <input type="text" id="firstnameInput" th:name="firstname" placeholder="Иван" required>
+                            <input type="text" id="firstnameInput" th:name="firstname" placeholder="Иван"
+                                required></input>
                         </div>
                         <div class="input-box-top">
                             <div>Фамилия</div>
-                            <input type="text" id="lastnameInput" th:name="lastname" placeholder="Иванов" required>
+                            <input type="text" id="lastnameInput" th:name="lastname" placeholder="Иванов"
+                                required></input>
                         </div>
                         <div class="input-box-top">
                             <div>Отчество</div>
-                            <input type="text" id="surnameInput" th:name="surname" placeholder="Иванович">
+                            <input type="text" id="surnameInput" th:name="surname" placeholder="Иванович"></input>
                         </div>
                     </div>
                     <div class="blank_blocks">
                         <div class="left_column">
                             <div class="input-box">
                                 <div>Электронная почта</div>
-                                <input type="text" id="emailInput" th:name="email" placeholder="Введите адрес свой электронной почты"
-                                    required>
+                                <input type="text" id="emailInput" th:name="email"
+                                    placeholder="Введите адрес свой электронной почты" required></input>
                             </div>
                             <div class="input-box">
                                 <div>Ник</div>
-                                <input type="text" id="usernameInput" th:name="userName" placeholder="Придумайте ник" required>
+                                <div class="nick_rand_column">
+                                    <input type="text" id="usernameInput" th:name="userName"
+                                        placeholder="Придумайте ник" required></input>
+                                    <i class="fa-solid fa-dice" id="rnd-btn">Случайний ник</i>
+
+                                </div>
+
                             </div>
                             <div class="input-box">
                                 <div>Пароль</div>
-                                <input type="password" id="pwdInput" th:name="password" placeholder="Создайте пароль" required>
+                                <input type="password" id="pwdInput" th:name="password" placeholder="Создайте пароль"
+                                    required></input>
                             </div>
                             <div class="input-box">
                                 <div>Подтвердить пароль</div>
-                                <input type="password" id="pwdconfirmInput" th:name="passwordConfirmStr" placeholder="Подтвердите пароль" required>
+                                <input type="password" id="pwdconfirmInput" th:name="passwordConfirmStr"
+                                    placeholder="Подтвердите пароль" required></input>
                             </div>
+                            <div class="image_wrapper">
                                 <label class="input-box-profile-photo">
-                                    <div>Загрузите фото профиля(jpg, png)</div>
+                                    <div>Загрузите фото профиля(jpg, png, gif)</div>
                                     <div class="profile_photo_input">
-                                        <input type="file" name="imageprofile" th:name="avatarFile" id="imageprofileInput" accept=".jpg, .jpeg, .png" >
+                                        <input type="file" name="imageprofile" th:name="avatarFile"
+                                            id="imageprofileInput" onchange="PreviewImage();"
+                                            accept=".jpg, .jpeg, .png, .gif"></input>
                                         <span>Выберите фото</span>
                                     </div>
                                 </label>
+                                <div class="remove">
+                                    <img id="uploadPreview" class="uploadPreview" />
+                                    <span id="clear" class="remove_btn">Очистить</span>
+                                </div>
+                                <script> // удалить выбранную аватарку.не работает
+                                    let imageprofileInput = document.querySelector("#imageprofileInput"),
+                                        clearBn = document.querySelector("#clear");
+
+                                    clearBn.addEventListener("click", function () {
+                                        imageprofileInput.src = '';
+                                        let newControl = imageprofileInput.cloneNode(true)
+                                        imageprofileInput.replaceWith(newControl);
+                                        imageprofileInput = newControl;
+                                    });
+                                </script>
+                                <script type="text/javascript"> // предпросмотр. работает
+                                    function PreviewImage() {
+                                        var oFReader = new FileReader();
+                                        oFReader.readAsDataURL(document.getElementById("imageprofileInput").files[0]);
+                                        oFReader.onload = function (oFREvent) {
+                                            document.getElementById("uploadPreview").src = oFREvent.target.result;
+                                        };
+                                    };
+                                </script>
+                                <script>
+                                    const input = document.getElementById("usernameInput");
+                                    const btn = document.getElementById("rnd-btn");
+                                    btn.onclick = async () => {
+                                        let response = await fetch("http://localhost:8080/api/v1/getRandomNickname");
+                                        let json = await response.json();
+                                        input.value = json;
+                                    }
+                                </script>
+
+                            </div>
+
                         </div>
                         <div class="right_column">
                             <div class="input-box">
@@ -67,11 +117,11 @@
 
                             <div class="address_bottom_block">
                                 <div class="input-box">
-                                    <div>Строение*</div>
+                                    <div>Строение</div>
                                     <input name="text" id="building" th:name="building" placeholder="номер"></input>
                                 </div>
                                 <div class="input-box">
-                                    <div>Дом*</div>
+                                    <div>Дом</div>
                                     <input name="text" id="home" th:name="home" placeholder="дом"></input>
                                 </div>
                                 <div class="input-box">
@@ -80,8 +130,9 @@
                                 </div>
                             </div>
                             <div class="input-box">
-                                <div>Индекс*</div>
-                                <input type="number" name="text" id="index" th:name="index" placeholder="индекс"></input>
+                                <div>Индекс</div>
+                                <input type="number" name="text" id="index" th:name="index"
+                                    placeholder="индекс"></input>
                             </div>
                         </div>
                     </div>
@@ -89,14 +140,15 @@
                         <div class="input-box button">
                             <input type="Submit" value="Зарегистрироваться">
                         </div>
-                        <div class="text"> 
+                        <div class="text">
                             <h3> <a href="login.html" th:href="@{/login}">Уже регистрировались?</a></h3>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <script src="js/script.js"></script>
+        <script src="./js/script.js"></script>
+        <script src="https://kit.fontawesome.com/9abefbbb2a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

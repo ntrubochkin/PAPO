@@ -4,12 +4,13 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.noname.books_exchange.model.User;
 import com.noname.books_exchange.repository.IUserRepo;
+import com.noname.books_exchange.utils.SecureStringProvider;
+import com.noname.books_exchange.utils.Triplet;
 
 @Service
 public class UserService {
@@ -34,10 +35,11 @@ public class UserService {
                            String email,
                            String username,
                            String password,
-                           byte[] avatar)
+                           byte[] avatar,
+                           String avatarType)
     {
         String encodedPassword = pwdEncoder.encode(password);
-        User user = new User(firstname, lastname, surname, email, encodedPassword, avatar, username);
+        User user = new User(firstname, lastname, surname, email, encodedPassword, avatar, avatarType, username);
         return userRepository.save(user);
     }
 
@@ -69,19 +71,23 @@ public class UserService {
         return result;
     }
 
-    public Pair<User, Boolean> handleVKontakteAuth(String firstname,
-                                    String lastname,
-                                    String email,
-                                    String username,
-                                    byte[] avatar)
+    public Triplet<User, Boolean, String> handleVKontakteAuth(String firstname,
+                                                   String lastname,
+                                                   String email,
+                                                   String username,
+                                                   byte[] avatar,
+                                                   String avatarType)
     {
         User user = findUserByUserName(username);
         Boolean emailNeeded = false;
+        String rawPassword = "";
         if(user == null) {
-            user = new User(firstname, lastname, email, avatar, username);
-            user = userRepository.save(user);
             emailNeeded = true;
+            rawPassword = SecureStringProvider.getPassword();
+            String encodedPassword = pwdEncoder.encode(rawPassword);
+            user = new User(firstname, lastname, "", email, encodedPassword, avatar, avatarType, username);
+            user = userRepository.save(user);
         }
-        return Pair.of(user, emailNeeded);
+        return Triplet.of(user, emailNeeded, rawPassword);
     }
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,14 +67,16 @@ public class WelcomeController {
             //TODO сообщение об ошибке
         }
         byte[] avatar = null;
-        if(avatarFile != null) {
+        String avatarType = "";
+        if(!avatarFile.isEmpty()) {
             try {
                 avatar = avatarFile.getBytes();
+                avatarType = avatarFile.getContentType();
             } catch (IOException ioe) {
                 //TODO
             }
         }
-        User user = userService.createUser(firstname, lastname, surname, email, userName, password, avatar);
+        User user = userService.createUser(firstname, lastname, surname, email, userName, password, avatar, avatarType);
         Integer id = user.getIdUser();
         addressService.createAddress(id, city, street, buildingNumber, homeNumber, apartmentNumber, index);
         boolean emailSent = verificationService.sendVerificationEmail(id, email, userName);
@@ -82,17 +85,19 @@ public class WelcomeController {
         } else {
 
         }
-        return "redirect:login";
+        clientState.login(user, avatar, avatarType);
+        return "redirect:home";
     }
 
     //TODO
     @PostMapping("/login-attempt")
-    public String tryLogin(@RequestParam(value = "login",       required = true) String login,
+    public String tryLogin(Model model,
+                           @RequestParam(value = "login",       required = true) String login,
                            @RequestParam(value = "password",    required = true) String password)
     {
         User user = userService.findUserByLoginData(login, password);
         if(user != null) {
-            clientState.loggedIn = true; 
+            clientState.login(user);
             return "redirect:home";
         }
         //TODO сообщение об ошибке
