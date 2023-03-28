@@ -9,11 +9,19 @@ public class UserMsg {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idUserMsg;
-    private int idUser;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     private Timestamp createAt;
     private String text;
     private String notes;
-    private int idStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "id_status")
+    private Status status;
+
     private int type;
 
     public int getIdUserMsg() {
@@ -24,12 +32,12 @@ public class UserMsg {
         this.idUserMsg = idUserMsg;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Timestamp getCreateAt() {
@@ -56,12 +64,12 @@ public class UserMsg {
         this.notes = notes;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public int getType() {
@@ -80,8 +88,8 @@ public class UserMsg {
         UserMsg userMsg = (UserMsg) o;
 
         if (idUserMsg != userMsg.idUserMsg) return false;
-        if (idUser != userMsg.idUser) return false;
-        if (idStatus != userMsg.idStatus) return false;
+        if (!user.equals(userMsg.user)) return false;
+        if (!status.equals(userMsg.status)) return false;
         if (type != userMsg.type) return false;
         if (createAt != null ? !createAt.equals(userMsg.createAt) : userMsg.createAt != null) return false;
         if (text != null ? !text.equals(userMsg.text) : userMsg.text != null) return false;
@@ -93,11 +101,11 @@ public class UserMsg {
     @Override
     public int hashCode() {
         int result = idUserMsg;
-        result = 31 * result + idUser;
+        result = 31 * result + user.getIdUser();
         result = 31 * result + (createAt != null ? createAt.hashCode() : 0);
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + (notes != null ? notes.hashCode() : 0);
-        result = 31 * result + idStatus;
+        result = 31 * result + status.getIdStatus();
         result = 31 * result + type;
         return result;
     }

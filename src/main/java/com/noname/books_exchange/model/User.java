@@ -2,8 +2,10 @@ package com.noname.books_exchange.model;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.List;
 
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.Mapping;
 
 @Entity
 @Table(name = "user_info")
@@ -24,6 +26,21 @@ public class User {
     private boolean isSuperAdmin;
     private String userName;
     private String avatarType;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookResponse> bookResponseList;
+
+    @OneToMany(mappedBy = "user")
+    private List<OfferList> offerLists;
+
+    @OneToMany(mappedBy = "user")
+    private List<WishList> wishLists;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserAddress> userAddressList;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserMsg> userMsgList;
 
     public User() { }
 

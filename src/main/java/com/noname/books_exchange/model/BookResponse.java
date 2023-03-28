@@ -9,8 +9,15 @@ public class BookResponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idBookResponse;
-    private int idBookLiterary;
-    private int idUser;
+
+    @ManyToOne
+    @JoinColumn(name = "id_book_literary")
+    private BookLiterary bookLiterary;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     private Timestamp createAt;
     private String response;
     private String note;
@@ -23,20 +30,12 @@ public class BookResponse {
         this.idBookResponse = idBookResponse;
     }
 
-    public int getIdBookLiterary() {
-        return idBookLiterary;
+    public BookLiterary getBookLiterary() {
+        return bookLiterary;
     }
 
-    public void setIdBookLiterary(int idBookLiterary) {
-        this.idBookLiterary = idBookLiterary;
-    }
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setBookLiterary(BookLiterary bookLiterary) {
+        this.bookLiterary = bookLiterary;
     }
 
     public Timestamp getCreateAt() {
@@ -71,8 +70,8 @@ public class BookResponse {
         BookResponse that = (BookResponse) o;
 
         if (idBookResponse != that.idBookResponse) return false;
-        if (idBookLiterary != that.idBookLiterary) return false;
-        if (idUser != that.idUser) return false;
+        if (!bookLiterary.equals(bookLiterary)) return false;
+        if (!user.equals(that.user)) return false;
         if (createAt != null ? !createAt.equals(that.createAt) : that.createAt != null) return false;
         if (response != null ? !response.equals(that.response) : that.response != null) return false;
         if (note != null ? !note.equals(that.note) : that.note != null) return false;
@@ -83,8 +82,8 @@ public class BookResponse {
     @Override
     public int hashCode() {
         int result = idBookResponse;
-        result = 31 * result + idBookLiterary;
-        result = 31 * result + idUser;
+        result = 31 * result + bookLiterary.getIdBookLiterary();
+        result = 31 * result + user.getIdUser();
         result = 31 * result + (createAt != null ? createAt.hashCode() : 0);
         result = 31 * result + (response != null ? response.hashCode() : 0);
         result = 31 * result + (note != null ? note.hashCode() : 0);

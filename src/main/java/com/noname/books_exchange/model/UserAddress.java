@@ -2,12 +2,18 @@ package com.noname.books_exchange.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class UserAddress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idUserAddress;
-    private int idUser;
+
+    @ManyToOne //Поле в БД называется id_user
+    @JoinColumn(name = "id_user")
+    private User user;
+
     private String addrIndex;
     private String addrCity;
     private String addrStreet;
@@ -16,8 +22,19 @@ public class UserAddress {
     private String addrApart;
     private boolean isDefault;
 
-    public UserAddress(int idUser, String addrIndex, String addrCity, String addrStreet, String addrHouse, String addrStructure, String addrApart) {
-        this.idUser = idUser;
+    @OneToMany(mappedBy = "userAddress")
+    private List<WishList> wishLists;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public UserAddress(User user, String addrIndex, String addrCity, String addrStreet, String addrHouse, String addrStructure, String addrApart) {
+        this.user = user;
         this.addrIndex = addrIndex;
         this.addrCity = addrCity;
         this.addrStreet = addrStreet;
@@ -38,13 +55,6 @@ public class UserAddress {
         this.idUserAddress = idUserAddress;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
 
     public String getAddrIndex() {
         return addrIndex;
@@ -110,7 +120,7 @@ public class UserAddress {
         UserAddress that = (UserAddress) o;
 
         if (idUserAddress != that.idUserAddress) return false;
-        if (idUser != that.idUser) return false;
+        if (!user.equals(that.user)) return false;
         if (isDefault != that.isDefault) return false;
         if (addrIndex != null ? !addrIndex.equals(that.addrIndex) : that.addrIndex != null) return false;
         if (addrCity != null ? !addrCity.equals(that.addrCity) : that.addrCity != null) return false;
@@ -126,7 +136,7 @@ public class UserAddress {
     @Override
     public int hashCode() {
         int result = idUserAddress;
-        result = 31 * result + idUser;
+        result = 31 * result + user.getIdUser();
         result = 31 * result + (addrIndex != null ? addrIndex.hashCode() : 0);
         result = 31 * result + (addrCity != null ? addrCity.hashCode() : 0);
         result = 31 * result + (addrStreet != null ? addrStreet.hashCode() : 0);

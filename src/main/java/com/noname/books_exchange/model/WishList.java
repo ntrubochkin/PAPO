@@ -1,6 +1,7 @@
 package com.noname.books_exchange.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -9,11 +10,24 @@ public class WishList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idWishList;
-    private int idUser;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     private Timestamp createAt;
     private Timestamp updateAt;
-    private int idStatus;
-    private int idUserAddress;
+
+    @ManyToOne
+    @JoinColumn(name = "id_status")
+    private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user_address")
+    private UserAddress userAddress;
+
+    @OneToMany(mappedBy = "idList")
+    private List<UserList> userLists;
 
     public int getIdWishList() {
         return idWishList;
@@ -23,12 +37,12 @@ public class WishList {
         this.idWishList = idWishList;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Timestamp getCreateAt() {
@@ -47,20 +61,20 @@ public class WishList {
         this.updateAt = updateAt;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public int getIdUserAddress() {
-        return idUserAddress;
+    public UserAddress getUserAddress() {
+        return userAddress;
     }
 
-    public void setIdUserAddress(int idUserAddress) {
-        this.idUserAddress = idUserAddress;
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
     }
 
     @Override
@@ -71,9 +85,9 @@ public class WishList {
         WishList wishList = (WishList) o;
 
         if (idWishList != wishList.idWishList) return false;
-        if (idUser != wishList.idUser) return false;
-        if (idStatus != wishList.idStatus) return false;
-        if (idUserAddress != wishList.idUserAddress) return false;
+        if (!user.equals(wishList.user)) return false;
+        if (!status.equals(wishList.status)) return false;
+        if (!userAddress.equals(wishList.userAddress)) return false;
         if (createAt != null ? !createAt.equals(wishList.createAt) : wishList.createAt != null) return false;
         if (updateAt != null ? !updateAt.equals(wishList.updateAt) : wishList.updateAt != null) return false;
 
@@ -83,11 +97,11 @@ public class WishList {
     @Override
     public int hashCode() {
         int result = idWishList;
-        result = 31 * result + idUser;
+        result = 31 * result + user.getIdUser();
         result = 31 * result + (createAt != null ? createAt.hashCode() : 0);
         result = 31 * result + (updateAt != null ? updateAt.hashCode() : 0);
-        result = 31 * result + idStatus;
-        result = 31 * result + idUserAddress;
+        result = 31 * result + status.getIdStatus();
+        result = 31 * result + userAddress.getIdUserAddress();
         return result;
     }
 }

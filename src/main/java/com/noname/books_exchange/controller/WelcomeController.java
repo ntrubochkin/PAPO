@@ -2,6 +2,7 @@ package com.noname.books_exchange.controller;
 
 import java.io.IOException;
 
+import com.noname.books_exchange.model.VerificationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,8 +79,9 @@ public class WelcomeController {
         }
         User user = userService.createUser(firstname, lastname, surname, email, userName, password, avatar, avatarType);
         Integer id = user.getIdUser();
-        addressService.createAddress(id, city, street, buildingNumber, homeNumber, apartmentNumber, index);
+        addressService.createAddress(user, city, street, buildingNumber, homeNumber, apartmentNumber, index);
         boolean emailSent = verificationService.sendVerificationEmail(id, email, userName);
+
         if(emailSent) {
 
         } else {

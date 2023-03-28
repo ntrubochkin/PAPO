@@ -2,13 +2,19 @@ package com.noname.books_exchange.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class UserList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idUserList;
     private int typeList;
+
     private int idList;
+
+    @OneToMany(mappedBy = "userList")
+    private List<UserValueCategory> userValueCategoryList;
 
     public int getIdUserList() {
         return idUserList;
@@ -26,13 +32,6 @@ public class UserList {
         this.typeList = typeList;
     }
 
-    public int getIdList() {
-        return idList;
-    }
-
-    public void setIdList(int idList) {
-        this.idList = idList;
-    }
 
     @Override
     public boolean equals(Object o) {

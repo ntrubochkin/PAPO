@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 
 @Entity
 public class VerificationInfo {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idUser;
     private Timestamp generatedAt;

@@ -1,6 +1,7 @@
 package com.noname.books_exchange.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -9,12 +10,28 @@ public class ExchangeList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idExchangeList;
-    private int idOfferList1;
-    private int idWishList1;
-    private int idOfferList2;
-    private int idWishList2;
+
+    @OneToOne
+    @JoinColumn(name = "id_offer_list1")
+    private OfferList offerList1;
+
+    @OneToOne
+    @JoinColumn(name = "id_wish_list1")
+    private WishList wishList1;
+
+    @OneToOne
+    @JoinColumn(name = "id_offer_list2")
+    private OfferList offerList2;
+
+    @OneToOne
+    @JoinColumn(name = "id_wish_list2")
+    private WishList wishList2;
+
     private Timestamp createAt;
     private boolean isBoth;
+
+    @OneToMany(mappedBy = "exchangeList")
+    private List<UserExchangeList> userExchangeLists;
 
     public int getIdExchangeList() {
         return idExchangeList;
@@ -24,36 +41,36 @@ public class ExchangeList {
         this.idExchangeList = idExchangeList;
     }
 
-    public int getIdOfferList1() {
-        return idOfferList1;
+    public OfferList getOfferList1() {
+        return offerList1;
     }
 
-    public void setIdOfferList1(int idOfferList1) {
-        this.idOfferList1 = idOfferList1;
+    public void setOfferList1(OfferList offerList1) {
+        this.offerList1 = offerList1;
     }
 
-    public int getIdWishList1() {
-        return idWishList1;
+    public WishList getWishList1() {
+        return wishList1;
     }
 
-    public void setIdWishList1(int idWishList1) {
-        this.idWishList1 = idWishList1;
+    public void setWishList1(WishList wishList1) {
+        this.wishList1 = wishList1;
     }
 
-    public int getIdOfferList2() {
-        return idOfferList2;
+    public OfferList getOfferList2() {
+        return offerList2;
     }
 
-    public void setIdOfferList2(int idOfferList2) {
-        this.idOfferList2 = idOfferList2;
+    public void setOfferList2(OfferList offerList2) {
+        this.offerList2 = offerList2;
     }
 
-    public int getIdWishList2() {
-        return idWishList2;
+    public WishList getWishList2() {
+        return wishList2;
     }
 
-    public void setIdWishList2(int idWishList2) {
-        this.idWishList2 = idWishList2;
+    public void setWishList2(WishList wishList2) {
+        this.wishList2 = wishList2;
     }
 
     public Timestamp getCreateAt() {
@@ -80,10 +97,10 @@ public class ExchangeList {
         ExchangeList that = (ExchangeList) o;
 
         if (idExchangeList != that.idExchangeList) return false;
-        if (idOfferList1 != that.idOfferList1) return false;
-        if (idWishList1 != that.idWishList1) return false;
-        if (idOfferList2 != that.idOfferList2) return false;
-        if (idWishList2 != that.idWishList2) return false;
+        if (!offerList1.equals(that.offerList1)) return false;
+        if (!wishList1.equals(that.wishList1)) return false;
+        if (!offerList2.equals(that.offerList2)) return false;
+        if (!wishList2.equals(that.wishList2)) return false;
         if (isBoth != that.isBoth) return false;
         if (createAt != null ? !createAt.equals(that.createAt) : that.createAt != null) return false;
 
@@ -93,10 +110,10 @@ public class ExchangeList {
     @Override
     public int hashCode() {
         int result = idExchangeList;
-        result = 31 * result + idOfferList1;
-        result = 31 * result + idWishList1;
-        result = 31 * result + idOfferList2;
-        result = 31 * result + idWishList2;
+        result = 31 * result + offerList1.getIdOfferList();
+        result = 31 * result + wishList1.getIdWishList();
+        result = 31 * result + offerList2.getIdOfferList();
+        result = 31 * result + wishList2.getIdWishList();
         result = 31 * result + (createAt != null ? createAt.hashCode() : 0);
         result = 31 * result + (isBoth ? 1 : 0);
         return result;
