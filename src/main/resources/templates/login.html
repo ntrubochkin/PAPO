@@ -12,7 +12,7 @@
   <div class="container">
     <div class="wrapper">
       <div class="title"><span>Авторизация</span></div>
-      <form th:action="@{/login-attempt}" method="post">
+      <form th:action="@{/login-attempt}" method="get">
         <div class="row">
           <i class="fas fa-user"></i>
           <input id="usernamelogin" th:name="login" type="text" placeholder="Логин" required>

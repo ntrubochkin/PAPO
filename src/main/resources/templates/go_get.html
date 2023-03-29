@@ -92,148 +92,63 @@
                                 <details>
                                     <summary>Жанр</summary>
                                     <ul>
-                                        <div>
-                                            <input type="checkbox" id="detective" name="genre" value="detective">
-                                            <label for="detective">Детектив</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="childrens_books" name="genre"
-                                                value="childrens_books">
-                                            <label for="childrens_books">Детские книги</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="history" name="genre" value="history">
-                                            <label for="history">История</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="memuars" name="genre" value="memuars">
-                                            <label for="memuars">Мемуары</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="adventures" name="genre" value="adventures">
-                                            <label for="adventures">Приключение</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="psychology" name="genre" value="psychology">
-                                            <label for="psychology">Психология</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="fantastic" name="genre" value="fantastic">
-                                            <label for="fantastic">Фантастика</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="esoterics" name="genre" value="esoterics">
-                                            <label for="esoterics">Эзотерика</label>
+                                        <div th:each="gen: ${genre}">
+                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                            <label th:utext="${gen.name}"/>
                                         </div>
                                     </ul>
                                 </details>
                                 <details>
                                     <summary>Область наук</summary>
                                     <ul>
-                                        <div>
-                                            <input type="checkbox" id="technic" name="source" value="technic">
-                                            <label for="technic">Технические науки</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
-                                            <label for="linguistics">Языкознание</label>
+                                        <div th:each="sf: ${science_field}">
+                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                            <label th:utext="${sf.name}"/>
                                         </div>
                                     </ul>
                                 </details>
                                 <details>
                                     <summary>Состояние</summary>
                                     <ul>
-                                        <div>
-                                            <input type="radio" id="new" name="condition" value="new">
-                                            <label for="new">Новое</label>
-                                        </div>
-                                        <div>
-                                            <input type="radio" id="good" name="condition" value="good">
-                                            <label for="good">Хорошее</label>
+                                        <div th:each="st: ${state}">
+                                            <input type="radio" id="detective" name="source" value="detective">
+                                            <label th:utext="${st.name}"/>
                                         </div>
                                     </ul>
                                 </details>
                                 <details>
                                     <summary>Обложка</summary>
                                     <ul>
-                                        <div>
-                                            <div><input type="radio" id="hard_cover" name="cover" value="hard_cover">
-                                                <label for="hard_cover">Твёрдая</label>
-                                            </div>
-                                            <div><input type="radio" id="soft_cover" name="cover" value="soft_cover">
-                                                <label for="soft_cover">Мягкая</label>
-                                            </div>
-                                            <div><input type="radio" id="doesnt_matter" name="cover" value="doesnt_matter">
-                                                <label for="doesnt_matter">Без разницы</label>
-                                            </div>
+                                        <div th:each="cv: ${cover}">
+                                            <input type="radio" id="detective" name="source" value="detective">
+                                            <label th:utext="${cv.name}"/>
                                         </div>
                                     </ul>
                                 </details>
                                 <details>
                                     <summary>Лауреат</summary>
                                     <ul>
-                                        <div>
-                                            <input type="checkbox" id="big_book" name="award" value="big_book">
-                                            <label for="big_book">Большая книга</label>
+                                        <div th:each="lau: ${laureate}">
+                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                            <label th:utext="${lau.name}"/>
                                         </div>
-                                        <div>
-                                            <input type="checkbox" id="national_nestseller" name="award" value="national_nestseller">
-                                            <label for="national_nestseller">Национальный бестселлер</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="nobelpriset" name="award" value="nobelpriset">
-                                            <label for="nobelpriset">Нобелевская премия по литературе</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="hugo" name="award" value="hugo">
-                                            <label for="hugo">Премия «Хьюго» за лучший роман</label>
-                                        </div>
-                                        
                                     </ul>
                                 </details>
                                 <details>
                                     <summary>Экранизация</summary>
                                     <ul>
-                                        <div>
-                                            <input type="checkbox" id="film" name="adaptation" value="film">
-                                            <label for="film">Фильм</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="series" name="adaptation" value="series">
-                                            <label for="series">Сериал</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="theatrical" name="adaptation" value="theatrical">
-                                            <label for="theatrical">Театральная адаптация</label>
+                                        <div th:each="fm: ${film_adaptation}">
+                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                            <label th:utext="${fm.name}"/>
                                         </div>
                                     </ul>
                                 </details>
                                 <details>
                                     <summary>Язык издания</summary>
                                     <ul>
-                                        <div>
-                                            <input type="checkbox" id="russian" name="language" value="russian">
-                                            <label for="russian">Русский язык</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="english" name="language" value="english">
-                                            <label for="english">Английский язык</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="chinese" name="language" value="chinese">
-                                            <label for="chinese">Китайский язык</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="arabic" name="language" value="arabic">
-                                            <label for="arabic">Арабский язык</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="spanish" name="language" value="spanish">
-                                            <label for="spanish">Испанский язык</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" id="japanese" name="language" value="japanese">
-                                            <label for="japanese">Японский язык</label>
+                                        <div th:each="pl: ${publication_language}">
+                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                            <label th:utext="${pl.name}"/>
                                         </div>
                                     </ul>
                                 </details>

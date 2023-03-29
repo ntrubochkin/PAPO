@@ -1,5 +1,6 @@
 package com.noname.books_exchange.controller;
 
+import com.noname.books_exchange.utils.BlankExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,12 @@ import com.noname.books_exchange.utils.ClientState;
 public class DefaultController {
 
     private final ClientState clientState;
+    private final BlankExchange blankExchange;
 
     @Autowired
-    public DefaultController(ClientState state) {
+    public DefaultController(ClientState state, BlankExchange blankExchange) {
         clientState = state;
+        this.blankExchange = blankExchange;
     }
 
     @RequestMapping("/")
@@ -52,6 +55,8 @@ public class DefaultController {
     @RequestMapping("/go_trade")
     public String goTrade(Model model) {
         clientState.setGeneralPageInfo(model);
+        //TODO: Венера.Как бы это переделать нормально...
+        blankExchange.setCategories(model);
         return "go_trade";
     }
 
@@ -73,6 +78,8 @@ public class DefaultController {
     @RequestMapping("/go_get")
     public String goGet(Model model) {
         clientState.setGeneralPageInfo(model);
+        //TODO: Венера.Как бы это переделать нормально...
+        blankExchange.setCategories(model);
         return "go_get";
     }
 
