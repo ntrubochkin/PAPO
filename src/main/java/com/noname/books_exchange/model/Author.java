@@ -2,6 +2,8 @@ package com.noname.books_exchange.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -9,6 +11,9 @@ public class Author {
     private int idAuthor;
     private String lastName;
     private String firstName;
+
+    @OneToMany(mappedBy = "author")
+    private List<BookLiterary> books;
 
     public int getIdAuthor() {
         return idAuthor;

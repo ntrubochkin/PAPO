@@ -2,6 +2,7 @@ package com.noname.books_exchange.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -10,13 +11,26 @@ public class OfferList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idOfferList;
-    private int idBookLiterary;
-    private int idUser;
+
+    @OneToOne
+    @JoinColumn(name = "id_book_literary")
+    private BookLiterary bookLiterary;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     private String isbn;
     private Date yearPublishing;
     private Timestamp createAt;
     private Timestamp updateAt;
-    private int idStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "id_status")
+    private Status status;
+
+    @OneToMany(mappedBy = "idList")
+    private List<UserList> userLists;
 
     public int getIdOfferList() {
         return idOfferList;
@@ -26,20 +40,20 @@ public class OfferList {
         this.idOfferList = idOfferList;
     }
 
-    public int getIdBookLiterary() {
-        return idBookLiterary;
+    public BookLiterary getBookLiterary() {
+        return bookLiterary;
     }
 
-    public void setIdBookLiterary(int idBookLiterary) {
-        this.idBookLiterary = idBookLiterary;
+    public void setBookLiterary(BookLiterary bookLiterary) {
+        this.bookLiterary = bookLiterary;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getIsbn() {
@@ -74,12 +88,12 @@ public class OfferList {
         this.updateAt = updateAt;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -90,9 +104,9 @@ public class OfferList {
         OfferList offerList = (OfferList) o;
 
         if (idOfferList != offerList.idOfferList) return false;
-        if (idBookLiterary != offerList.idBookLiterary) return false;
-        if (idUser != offerList.idUser) return false;
-        if (idStatus != offerList.idStatus) return false;
+        if (!bookLiterary.equals(offerList.bookLiterary)) return false;
+        if (!user.equals(offerList.user)) return false;
+        if (!status.equals(offerList.status)) return false;
         if (isbn != null ? !isbn.equals(offerList.isbn) : offerList.isbn != null) return false;
         if (yearPublishing != null ? !yearPublishing.equals(offerList.yearPublishing) : offerList.yearPublishing != null)
             return false;
@@ -105,13 +119,13 @@ public class OfferList {
     @Override
     public int hashCode() {
         int result = idOfferList;
-        result = 31 * result + idBookLiterary;
-        result = 31 * result + idUser;
+        result = 31 * result + bookLiterary.getIdBookLiterary();
+        result = 31 * result + user.getIdUser();
         result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
         result = 31 * result + (yearPublishing != null ? yearPublishing.hashCode() : 0);
         result = 31 * result + (createAt != null ? createAt.hashCode() : 0);
         result = 31 * result + (updateAt != null ? updateAt.hashCode() : 0);
-        result = 31 * result + idStatus;
+        result = 31 * result + status.getIdStatus();
         return result;
     }
 }

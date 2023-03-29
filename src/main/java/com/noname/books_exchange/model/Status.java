@@ -2,12 +2,23 @@ package com.noname.books_exchange.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idStatus;
     private String name;
+
+    @OneToMany(mappedBy = "status")
+    private List<UserMsg> userMsgList;
+
+    @OneToMany(mappedBy = "status")
+    private List<OfferList> offerLists;
+
+    @OneToMany(mappedBy = "status")
+    private List<WishList> wishLists;
 
     public int getIdStatus() {
         return idStatus;

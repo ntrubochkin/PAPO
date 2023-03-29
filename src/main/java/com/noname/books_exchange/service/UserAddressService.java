@@ -1,5 +1,6 @@
 package com.noname.books_exchange.service;
 
+import com.noname.books_exchange.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class UserAddressService {
         this.addressRepo = addressRepo;
     }
 
-    public void createAddress(Integer idUser,
+    public void createAddress(User user,
                               String city,
                               String street,
                               String buildingNumber,
@@ -24,7 +25,7 @@ public class UserAddressService {
                               Integer index)
     {
         String indexStr = (index == null) ? "" : index.toString(); //TODO BRUH
-        UserAddress address = new UserAddress(idUser,
+        UserAddress address = new UserAddress(user,
                                               indexStr,
                                               city,
                                               street,

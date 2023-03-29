@@ -2,14 +2,23 @@ package com.noname.books_exchange.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class BookLiterary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idBookLiterary;
-    private int idAuthor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_author")
+    private Author author;
+
     private String bookName;
     private String note;
+
+    @OneToMany(mappedBy = "bookLiterary")
+    private List<BookResponse> bookResponseList;
 
     public int getIdBookLiterary() {
         return idBookLiterary;
@@ -19,12 +28,12 @@ public class BookLiterary {
         this.idBookLiterary = idBookLiterary;
     }
 
-    public int getIdAuthor() {
-        return idAuthor;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setIdAuthor(int idAuthor) {
-        this.idAuthor = idAuthor;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getBookName() {
@@ -51,7 +60,7 @@ public class BookLiterary {
         BookLiterary that = (BookLiterary) o;
 
         if (idBookLiterary != that.idBookLiterary) return false;
-        if (idAuthor != that.idAuthor) return false;
+        if (!author.equals(that.author)) return false;
         if (bookName != null ? !bookName.equals(that.bookName) : that.bookName != null) return false;
         if (note != null ? !note.equals(that.note) : that.note != null) return false;
 
@@ -61,7 +70,7 @@ public class BookLiterary {
     @Override
     public int hashCode() {
         int result = idBookLiterary;
-        result = 31 * result + idAuthor;
+        result = 31 * result + author.getIdAuthor();
         result = 31 * result + (bookName != null ? bookName.hashCode() : 0);
         result = 31 * result + (note != null ? note.hashCode() : 0);
         return result;

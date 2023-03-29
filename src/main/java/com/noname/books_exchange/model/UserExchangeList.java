@@ -7,8 +7,15 @@ public class UserExchangeList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idUserExchangeList;
-    private int idExchangeList;
-    private int idOfferList;
+
+    @ManyToOne
+    @JoinColumn(name = "id_exchange_list")
+    private ExchangeList exchangeList;
+
+    @OneToOne
+    @JoinColumn(name = "id_offer_list")
+    private OfferList offerList;
+
     private String trackNumber;
     private boolean receiving;
 
@@ -20,20 +27,20 @@ public class UserExchangeList {
         this.idUserExchangeList = idUserExchangeList;
     }
 
-    public int getIdExchangeList() {
-        return idExchangeList;
+    public ExchangeList getExchangeList() {
+        return exchangeList;
     }
 
-    public void setIdExchangeList(int idExchangeList) {
-        this.idExchangeList = idExchangeList;
+    public void setExchangeList(ExchangeList exchangeList) {
+        this.exchangeList = exchangeList;
     }
 
-    public int getIdOfferList() {
-        return idOfferList;
+    public OfferList getOfferList() {
+        return offerList;
     }
 
-    public void setIdOfferList(int idOfferList) {
-        this.idOfferList = idOfferList;
+    public void setOfferList(OfferList offerList) {
+        this.offerList = offerList;
     }
 
     public String getTrackNumber() {
@@ -60,8 +67,8 @@ public class UserExchangeList {
         UserExchangeList that = (UserExchangeList) o;
 
         if (idUserExchangeList != that.idUserExchangeList) return false;
-        if (idExchangeList != that.idExchangeList) return false;
-        if (idOfferList != that.idOfferList) return false;
+        if (!exchangeList.equals(that.exchangeList)) return false;
+        if (!offerList.equals(that.offerList)) return false;
         if (receiving != that.receiving) return false;
         if (trackNumber != null ? !trackNumber.equals(that.trackNumber) : that.trackNumber != null) return false;
 
@@ -71,8 +78,8 @@ public class UserExchangeList {
     @Override
     public int hashCode() {
         int result = idUserExchangeList;
-        result = 31 * result + idExchangeList;
-        result = 31 * result + idOfferList;
+        result = 31 * result + exchangeList.getIdExchangeList();
+        result = 31 * result + offerList.getIdOfferList();
         result = 31 * result + (trackNumber != null ? trackNumber.hashCode() : 0);
         result = 31 * result + (receiving ? 1 : 0);
         return result;

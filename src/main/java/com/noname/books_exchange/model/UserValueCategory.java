@@ -7,8 +7,14 @@ public class UserValueCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idUserValueCategory;
-    private int idUserList;
-    private int idCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "user_list")
+    private UserList userList;
+
+    @OneToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
 
     public int getIdUserValueCategory() {
         return idUserValueCategory;
@@ -18,20 +24,20 @@ public class UserValueCategory {
         this.idUserValueCategory = idUserValueCategory;
     }
 
-    public int getIdUserList() {
-        return idUserList;
+    public UserList getUserList() {
+        return userList;
     }
 
-    public void setIdUserList(int idUserList) {
-        this.idUserList = idUserList;
+    public void setUserList(UserList userList) {
+        this.userList = userList;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -42,8 +48,8 @@ public class UserValueCategory {
         UserValueCategory that = (UserValueCategory) o;
 
         if (idUserValueCategory != that.idUserValueCategory) return false;
-        if (idUserList != that.idUserList) return false;
-        if (idCategory != that.idCategory) return false;
+        if (!userList.equals(that.userList)) return false;
+        if (!category.equals(that.category)) return false;
 
         return true;
     }
@@ -51,8 +57,8 @@ public class UserValueCategory {
     @Override
     public int hashCode() {
         int result = idUserValueCategory;
-        result = 31 * result + idUserList;
-        result = 31 * result + idCategory;
+        result = 31 * result + userList.getIdUserList();
+        result = 31 * result + category.getIdCategory();
         return result;
     }
 }
