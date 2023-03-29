@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сервис обмена книгами</title>
     <link rel="stylesheet" href="styles/style.css">
+    <script th:src="@{/js/script.js}" defer></script>
 </head>
 
 <body>
@@ -19,7 +20,23 @@
                     </a>
                     <h1 class="title">Сервис обмена книгами</h1>
                 </div>
-                <nav th:if="${!isAuthorized}" class="header_nav">
+                <a th:if="${isAuthorized}" href="#" class="profile_card_home">
+                    <div>
+                        <img th:src="${b64uAvatar}" alt="" id="imageprofile" class="image_profile">
+                    </div>
+                    <div>
+                        <div class="username" id="userName">Смелый заяц</div>
+                        <div class="rating" id="rating">Рейтинг 2</div>
+                    </div>
+                    <div id="exit-btn" class="exit_button">
+                        <div class="exit_button">
+                            <i class="fa-solid fa-door-open"></i>
+                            <div>Выйти</div>
+                        </div>
+                    </div>
+                </a>
+
+                <nav th:unless="${isAuthorized}" class="header_nav">
                     <ul class="header_list">
                         <li class="header_item">
                             <a href="./login.html" th:href="@{/login}" class="header_link">Авторизация</a>
@@ -52,6 +69,14 @@
             </div>
         </div>
     </header>
+    <div th:if="${!isAuthorized}" id="notification-popup" class="notification">
+        <div class="okno">
+            Данный раздел доступен только авторизованному пользователю!
+        </div>
+        <div class="close" id="close-popup">
+            <i class="fa-regular fa-circle-xmark fa-xl"></i>
+        </div>
+    </div>
 
     <main class="main">
         <div class="main-wrapper">
@@ -63,6 +88,7 @@
             <!-- <img src="./img/intro-character.png" alt="intro-character" class="intro_character"> -->
         </div>
     </main>
+    <script src="https://kit.fontawesome.com/9abefbbb2a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

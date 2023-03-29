@@ -5,11 +5,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Активация записи</title>
+    <link rel="stylesheet" href="../styles/loading.css">
 </head>
 
 <body>
-    good
+    <div class="background">
+        <div class="blur"></div>
+    </div>
+    <div id='card' class="card">
+        <div id='upper-side' class="upper-side">
+            <i th:if="${verificationStatus}" class="fa-regular fa-circle-check fa-2xl"></i>
+            <i th:unless="${verificationStatus}" class="fa-regular fa-circle-xmark fa-2xl"></i>
+            <h3 th:if="${verificationStatus}" id='status' class="status"> УСПЕШНО! </h3>
+            <h3 th:unless="${verificationStatus}" id='status' class="status"> ПРОВАЛ! </h3>
+        </div>
+        <div th:switch="${verificationStatus}" id='lower-side' class="lower-side">
+            <p th:case="true" id='message' class="message">
+                Поздравляем, ваша учетная запись успешно активирована.
+            </p>
+            <p th:case="false" id='message' class="message">
+                Что-то пошло не так.
+            </p>
+            <a href="./login.html" th:href="@{/login}" id="contBtn" class="contBtn">Продолжить</a>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/9abefbbb2a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

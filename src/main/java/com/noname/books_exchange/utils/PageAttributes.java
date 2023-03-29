@@ -10,4 +10,5 @@ public class PageAttributes {
     public static final String USER_AVATAR = "b64uAvatar";
     public static final String USER_NAME = "uName";
     public static final String USER_RATING = "uRating";
+    public static final String VERIFICATION_STATUS = "verificationStatus";
 }

@@ -6,6 +6,7 @@ import com.noname.books_exchange.model.VerificationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,7 +56,7 @@ public class WelcomeController {
                               @RequestParam(value = "index",              required = false) Integer index)
     {
         if(!userService.isUserNameUnique(userName)) {
-            clientState.setErrorMessage(model, "Имя пользователя не уникально!");
+            clientState.setErrorMessage(model, "Пользователь с таким именем именем уже существет!");
             return "registration";
         }
         boolean pwdCheckResult = RegexUtils.validatePassword(password);
@@ -95,7 +96,7 @@ public class WelcomeController {
         return "login";
     }
 
-    @PostMapping("/login-attempt")
+    @GetMapping("/login-attempt")
     public String tryLogin(Model model,
                            @RequestParam(value = "login",       required = true) String login,
                            @RequestParam(value = "password",    required = true) String password)
@@ -107,5 +108,11 @@ public class WelcomeController {
         }
         //TODO сообщение об ошибке
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        clientState.logout();
+        return "redirect:login";
     }
 }

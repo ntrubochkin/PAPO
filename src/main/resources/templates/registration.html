@@ -14,7 +14,7 @@
             <div class="column">
                 <h2 class="reg">Регистрация</h2>
                 <form id="submit-form" th:action="@{/registration-attempt}" method="post" enctype="multipart/form-data">
-                    <div class="notify" id="notify-box" th:if="${badData}" th:text="${errorMessage}" >Что то у вас не
+                    <div class="notify" id="notify-box" th:if="${badData}" th:text="${errorMessage}">Что то у вас не
                         правильно!</div>
                     <div class="block_wrap">
                         <div class="input-box-top">
@@ -42,7 +42,7 @@
                                 <div class="nick_rand_column">
                                     <input type="text" id="usernameInput" th:name="userName"
                                         placeholder="Придумайте ник"></input>
-                                    <i class="fa-solid fa-dice" id="rnd-btn">Случайний ник</i>
+                                    <i class="fa-solid fa-dice" id="rnd-btn">Случайный ник</i>
 
                                 </div>
 
@@ -70,6 +70,7 @@
                                     <img id="uploadPreview" class="uploadPreview" />
                                     <span id="clear" class="remove_btn">Очистить</span>
                                 </div>
+
                             </div>
 
                         </div>
@@ -95,7 +96,8 @@
                                 </div>
                                 <div class="input-box">
                                     <div>Квартира</div>
-                                    <input name="text" id="apartment" th:name="apartment" placeholder=""></input>
+                                    <input type="number" name="text" id="apartment" th:name="apartment"
+                                        placeholder="номер"></input>
                                 </div>
                             </div>
                             <div class="input-box">

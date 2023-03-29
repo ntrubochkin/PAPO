@@ -28,6 +28,12 @@ public class ClientState {
         }
     }
 
+    public void logout() {
+        loggedIn = false;
+        user = null;
+        avatarBase64String = DEFAULT_BASE64_AVATAR;
+    }
+
     public void login(User user) {
         login(user, user.getAvatar(), user.getAvatarType());
     }

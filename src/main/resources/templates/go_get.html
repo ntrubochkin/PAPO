@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сервис обмена книгами</title>
     <link rel="stylesheet" href="styles/style.css">
+    <script th:src="@{/js/script.js}" defer></script>
 </head>
 
 <body>
@@ -14,11 +15,26 @@
             <div class="header_wrapper">
                 <div class="header_logo">
                     <a href="home.html" th:href="@{/home}" class="header_logo-link">
-                        <img src="img/svg/logo.svg" alt="Сервис обмена книгами" class="header_logo-pic">
+                        <img src="./img/svg/logo.svg" alt="Сервис обмена книгами" class="header_logo-pic">
                     </a>
                     <h1 class="title">Сервис обмена книгами</h1>
                 </div>
-                <nav class="header_nav">
+                <a th:if="${isAuthorized}" href="#" class="profile_card_home">
+                    <div>
+                        <img th:src="${b64uAvatar}" alt="" id="imageprofile" class="image_profile">
+                    </div>
+                    <div>
+                        <div class="username" id="userName" th:text="${uName}">Смелый заяц</div>
+                        <div class="rating" id="rating" th:text="Рейтинг + ' ' + ${uRating}">Рейтинг 2</div>
+                    </div>
+                    <div id="exit-btn" class="exit_button">
+                        <div class="exit_button">
+                            <i class="fa-solid fa-door-open"></i>
+                            <div>Выйти</div>
+                        </div>
+                    </div>
+                </a>
+                <nav th:unless="${isAuthorized}" class="header_nav">
                     <ul class="header_list">
                         <li class="header_item">
                             <a href="./login.html" th:href="@{/login}" class="header_link">Авторизация</a>
@@ -48,7 +64,14 @@
             </div>
         </div>
     </header>
-
+    <div th:if="${!isAuthorized}" id="notification-popup" class="notification">
+        <div class="okno">
+            Данный раздел доступен только авторизованному пользователю!
+        </div>
+        <div class="close" id="close-popup">
+            <i class="fa-regular fa-circle-xmark fa-xl"></i>
+        </div>
+    </div>
     <main class="go-trade">
         <section class="main-trade">
             <div class="trade_wrap">
@@ -59,7 +82,7 @@
                     <a href="go_trade.html" th:href="@{/go_trade}" class="get_blank_stroke_1">Хочу обменять</a>
                     <a href="go_get.html" th:href="@{/go_get}" class="get_blank_stroke_2">Хочу получить</a>
                     <a href="go_address.html" th:href="@{/go_address}" class="get_blank_stroke_3">Адрес доставки</a>
-
+                   
                 </div>
                 <div class="blank_blocks">
                     <div class="get_column">
@@ -70,36 +93,36 @@
                                     <summary>Жанр</summary>
                                     <ul>
                                         <div>
-                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                            <input type="checkbox" id="detective" name="genre" value="detective">
                                             <label for="detective">Детектив</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="childrens_books" name="source"
+                                            <input type="checkbox" id="childrens_books" name="genre"
                                                 value="childrens_books">
                                             <label for="childrens_books">Детские книги</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="history" name="source" value="history">
+                                            <input type="checkbox" id="history" name="genre" value="history">
                                             <label for="history">История</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="memuars" name="source" value="memuars">
+                                            <input type="checkbox" id="memuars" name="genre" value="memuars">
                                             <label for="memuars">Мемуары</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="adventures" name="source" value="adventures">
+                                            <input type="checkbox" id="adventures" name="genre" value="adventures">
                                             <label for="adventures">Приключение</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="psychology" name="source" value="psychology">
+                                            <input type="checkbox" id="psychology" name="genre" value="psychology">
                                             <label for="psychology">Психология</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="fantastic" name="source" value="fantastic">
+                                            <input type="checkbox" id="fantastic" name="genre" value="fantastic">
                                             <label for="fantastic">Фантастика</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="esoterics" name="source" value="esoterics">
+                                            <input type="checkbox" id="esoterics" name="genre" value="esoterics">
                                             <label for="esoterics">Эзотерика</label>
                                         </div>
                                     </ul>
@@ -140,7 +163,9 @@
                                             <div><input type="radio" id="soft_cover" name="cover" value="soft_cover">
                                                 <label for="soft_cover">Мягкая</label>
                                             </div>
-
+                                            <div><input type="radio" id="doesnt_matter" name="cover" value="doesnt_matter">
+                                                <label for="doesnt_matter">Без разницы</label>
+                                            </div>
                                         </div>
                                     </ul>
                                 </details>
@@ -148,25 +173,38 @@
                                     <summary>Лауреат</summary>
                                     <ul>
                                         <div>
-                                            <input type="checkbox" id="technic" name="source" value="technic">
-                                            <label for="technic">Технические науки</label>
+                                            <input type="checkbox" id="big_book" name="award" value="big_book">
+                                            <label for="big_book">Большая книга</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
-                                            <label for="linguistics">Языкознание</label>
+                                            <input type="checkbox" id="national_nestseller" name="award" value="national_nestseller">
+                                            <label for="national_nestseller">Национальный бестселлер</label>
                                         </div>
+                                        <div>
+                                            <input type="checkbox" id="nobelpriset" name="award" value="nobelpriset">
+                                            <label for="nobelpriset">Нобелевская премия по литературе</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="hugo" name="award" value="hugo">
+                                            <label for="hugo">Премия «Хьюго» за лучший роман</label>
+                                        </div>
+                                        
                                     </ul>
                                 </details>
                                 <details>
                                     <summary>Экранизация</summary>
                                     <ul>
                                         <div>
-                                            <input type="checkbox" id="technic" name="source" value="technic">
-                                            <label for="technic">Технические науки</label>
+                                            <input type="checkbox" id="film" name="adaptation" value="film">
+                                            <label for="film">Фильм</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
-                                            <label for="linguistics">Языкознание</label>
+                                            <input type="checkbox" id="series" name="adaptation" value="series">
+                                            <label for="series">Сериал</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="theatrical" name="adaptation" value="theatrical">
+                                            <label for="theatrical">Театральная адаптация</label>
                                         </div>
                                     </ul>
                                 </details>
@@ -174,12 +212,28 @@
                                     <summary>Язык издания</summary>
                                     <ul>
                                         <div>
-                                            <input type="checkbox" id="technic" name="source" value="technic">
-                                            <label for="technic">Технические науки</label>
+                                            <input type="checkbox" id="russian" name="language" value="russian">
+                                            <label for="russian">Русский язык</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="linguistics" name="source" value="linguistics">
-                                            <label for="linguistics">Языкознание</label>
+                                            <input type="checkbox" id="english" name="language" value="english">
+                                            <label for="english">Английский язык</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="chinese" name="language" value="chinese">
+                                            <label for="chinese">Китайский язык</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="arabic" name="language" value="arabic">
+                                            <label for="arabic">Арабский язык</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="spanish" name="language" value="spanish">
+                                            <label for="spanish">Испанский язык</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="japanese" name="language" value="japanese">
+                                            <label for="japanese">Японский язык</label>
                                         </div>
                                     </ul>
                                 </details>
@@ -188,12 +242,13 @@
                     </div>
                 </div>
                 <div class="get_buttons_column">
-                    <a href="go_trade.html" class="get_left_button">Назад</a>
-                    <a href="go_address.html" class="get_right_button">Далее</a>
+                    <a href="go_trade.html" th:href="@{/go_trade}" class="get_left_button">Назад</a>
+                    <a href="go_address.html" th:href="@{/go_address}" class="get_right_button">Далее</a>
                 </div>
             </div>
         </section>
     </main>
+    <script src="https://kit.fontawesome.com/9abefbbb2a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сервис обмена книгами</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <script th:src="@{/js/script.js}" defer></script>
 </head>
 
 <body>
@@ -18,7 +19,22 @@
                     </a>
                     <h1 class="title">Сервис обмена книгами</h1>
                 </div>
-                <nav th:if="${!isAuthorized}" class="header_nav">
+                <a th:if="${isAuthorized}" href="#" class="profile_card_home">
+                    <div>
+                        <img th:src="${b64uAvatar}" alt="" id="imageprofile" class="image_profile">
+                    </div>
+                    <div>
+                        <div class="username" id="userName" th:text="${uName}">Смелый заяц</div>
+                        <div class="rating" id="rating" th:text="Рейтинг + ' ' + ${uRating}">Рейтинг 2</div>
+                    </div>
+                    <div id="exit-btn" class="exit_button">
+                        <div class="exit_button">
+                            <i class="fa-solid fa-door-open"></i>
+                            <div>Выйти</div>
+                        </div>
+                    </div>
+                </a>
+                <nav th:unless="${isAuthorized}" class="header_nav">
                     <ul class="header_list">
                         <li class="header_item">
                             <a href="./login.html" th:href="@{/login}" class="header_link">Авторизация</a>
@@ -28,7 +44,6 @@
                         </li>
                     </ul>
                 </nav>
-
             </div>
         </div>
     </header>
@@ -48,12 +63,36 @@
             </div>
         </div>
     </header>
+    <div th:if="${!isAuthorized}" id="notification-popup" class="notification">
+        <div class="okno">
+            Данный раздел доступен только авторизованному пользователю!
+        </div>
+        <div class="close" id="close-popup">
+            <i class="fa-regular fa-circle-xmark fa-xl"></i>
+        </div>
 
-    <main class="trade">
-        <div class="main-trade">
+    </div>
+    <section class="main-question">
+        <div class="question_wrap">
+            <h2 class="blank_title">
+                Обратная связь
+            </h2>
+            <div class="question_box">
+                <form action="">
+                    <p>Задать вопрос<Br>
+                        <textarea class="question_area" name="ask_question" placeholder="Ваш вопрос..."></textarea>
+                    </p>
+                    <p><input class="question_btn" type="submit" value="Отправить">
+                        <input class="question_btn" type="reset" value="Очистить">
+                    </p>
+                </form>
+
+            </div>
 
         </div>
-    </main>
+    </section>
+
+    <script src="https://kit.fontawesome.com/9abefbbb2a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

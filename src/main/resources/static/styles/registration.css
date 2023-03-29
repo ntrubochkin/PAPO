@@ -107,7 +107,7 @@ form .input-box input {
 }
 
 .remove {
-    display: none; /* grid */
+    display: none;
 }
 
 .image_wrapper {
@@ -121,6 +121,10 @@ form .input-box input {
     border-radius: 4px;
     background-color: #16a084b9;
     cursor: pointer;
+}
+
+.remove span:hover {
+    background: #1fd8b3b9;
 }
 
 .right_column {
@@ -260,9 +264,12 @@ form .blank_blocks_reg_button input {
 
 .nick_rand_column {
     display: flex;
+    cursor: pointer;
 }
 
-
+.nick_rand_column i:hover {
+    background: #1fd8b3b9;
+}
 
 .blank_blocks i {
     gap: 7px;
@@ -279,6 +286,17 @@ form .blank_blocks_reg_button input {
     align-items: center;
     justify-content: center;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 
 /* <--><--><--><--><--><--><--><--><--><--><--> */
 

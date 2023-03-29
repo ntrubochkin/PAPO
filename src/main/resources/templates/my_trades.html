@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сервис обмена книгами</title>
     <link rel="stylesheet" href="styles/style.css">
+    <script th:src="@{/js/script.js}" defer></script>
 </head>
 
 <body>
@@ -28,7 +29,12 @@
                             <div class="username" id="userName" th:text="${uName}">Смелый заяц</div>
                             <div class="rating" id="rating" th:text="Рейтинг + ' ' + ${uRating}">Рейтинг 2</div>
                         </div>
-
+                        <div id="exit-btn" class="exit_button">
+                            <div class="exit_button">
+                                <i class="fa-solid fa-door-open"></i>
+                                <div>Выйти</div>
+                            </div>
+                        </div>
                     </a>
                 </nav>
 
@@ -73,7 +79,7 @@
                 <a href="#tab_06" class="tab_item">Личные данные</a>
                 <a href="#tab_07" class="tab_item">Сообщения</a>
                 <a href="#tab_08" class="tab_item">Архив</a>
-                <a href="#tab_09" class="tab_item">Выход</a>
+                <a href="#tab_09" th:href="@{/logout}" class="tab_item">Выход</a>
             </nav>
             <div class="tabs_body">
                 <div id="tab_01" class="tabs_block">
@@ -122,6 +128,13 @@
                                         </div>
                                         <button class="confirm_button" type="button"
                                             id="confirm_button">Подтвердить</button>
+                                        <div class="additional">
+                                            <div>Номер отправления</div>
+                                            <input type="number" name="sender_number" id="sender_number"
+                                                th:name="sender_number"></input>
+                                            <button class="additional_confirm_button" type="button"
+                                                id="additional_confirm_button">Отправил</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -169,6 +182,13 @@
                                         </div>
                                         <button class="confirm_button" type="button"
                                             id="confirm_button">Подтвердить</button>
+                                        <div class="additional">
+                                            <div>Номер отправления</div>
+                                            <input type="number" name="sender_number" id="sender_number"
+                                                th:name="sender_number"></input>
+                                            <button class="additional_confirm_button" type="button"
+                                                id="additional_confirm_button">Отправил</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -215,10 +235,16 @@
                                         </div>
                                         <button class="confirm_button" type="button"
                                             id="confirm_button">Подтвердить</button>
+                                        <div class="additional">
+                                            <div>Номер отправления</div>
+                                            <input type="number" name="sender_number" id="sender_number"
+                                                th:name="sender_number"></input>
+                                            <button class="additional_confirm_button" type="button"
+                                                id="additional_confirm_button">Отправил</button>
+                                        </div>
+
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -264,20 +290,6 @@
 
         </div>
     </div>
-    <!-- <script>
-        document.querySelectorAll('.details_button').forEach((el) => {
-            el.addEventListener('click', () => {
-                let dropdown_content = el.nextElementSibling;
-
-                if (dropdown_content.style.maxHeight) {
-                    document.querySelectorAll('dropdown_content').forEach((el) => el.style.maxHeight = null)
-                }else {
-                    document.querySelectorAll('dropdown_content').forEach((el) => el.style.maxHeight = null)
-                    dropdown_content.style.maxHeight = dropdown_content.scrollHeight + 'px'
-                }
-            })
-        })
-    </script> -->
     <script>
         var acc = document.getElementsByClassName("details_button");
         var i;
@@ -293,26 +305,22 @@
                 }
             });
         }
+    
+        var acc1 = document.getElementsByClassName("confirm_button");
+        var j;
+        for (j = 0; j < acc1.length; j++) {
+            acc1[j].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var additional = this.nextElementSibling;
+                if (additional.style.maxHeight) {
+                    additional.style.maxHeight = null;
+                } else {
+                    additional.style.maxHeight = additional.scrollHeight + "px";
+                }
+            });
+        }
     </script>
-
-    <!-- <main class="my_trades">
-        <div class="my_trades_left">
-            <div class="profile_elements">Предложения для обмена</div>
-            <div class="profile_elements">Хочу обменять</div>
-            <div class="profile_elements">Хочу получить</div>
-            <div class="profile_elements">Активные обмены</div>
-            <div class="profile_elements">Отзывы на книги</div>
-            <div class="profile_elements">Личные данные</div>
-            <div class="profile_elements">Сообщения</div>
-            <div class="profile_elements">Архив</div>
-            <div class="profile_elements">Выход</div>
-        </div>
-        <div class="my_trades_right">
-            <div class="book match">
-                
-            </div>
-        </div>
-    </main> -->
+    <script src="https://kit.fontawesome.com/9abefbbb2a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

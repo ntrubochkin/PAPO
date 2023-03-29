@@ -48,12 +48,12 @@ async function callOutApi(apiFunction) {
 const FIVE_MEGABYTES = 1024 * 1024 * 5;
 
 avatarInput.addEventListener("change", () => {
-    previewBox.style.display = "grid";
     let file = avatarInput.files[0];
     if(file.size > FIVE_MEGABYTES) {
-        ToastModule.makeToast("Размер фотографии не должен превышать 5МБ.");
+        ToastModule.makeToast("Размер файла не должен превышать 5МБ.");
         return;
     }
+    previewBox.style.display = "grid";
     let reader = new FileReader();
     reader.onload = (e) => {
         avatarPreview.src = e.target.result;

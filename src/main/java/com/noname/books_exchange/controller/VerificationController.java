@@ -2,6 +2,7 @@ package com.noname.books_exchange.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.noname.books_exchange.model.VerificationInfo;
 import com.noname.books_exchange.service.UserService;
 import com.noname.books_exchange.service.VerificationInfoService;
+import com.noname.books_exchange.utils.PageAttributes;
 
 @Controller
 @RequestMapping("/verification")
@@ -24,14 +26,16 @@ public class VerificationController {
     }
     
     @GetMapping("/{verificationString}")
-    public String verify(@PathVariable(value = "verificationString") String randomStr) {
+    public String verify(Model model, @PathVariable(value = "verificationString") String randomStr)
+    {
         VerificationInfo info = vService.findByGeneratedString(randomStr);
+        boolean result = false;
         if(info != null) {
             userService.enableUser(info.getIdUser());
             vService.deleteRow(info);
-            //TODO сообщение об успешной верификации
+            result = true;
         }
-        //TODO сообщение об ошибке
+        model.addAttribute(PageAttributes.VERIFICATION_STATUS, result);
         return "verification";
     }
 }
