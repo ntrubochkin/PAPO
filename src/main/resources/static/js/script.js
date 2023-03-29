@@ -4,7 +4,11 @@ const exitBtn = document.getElementById("exit-btn");
 
 if(popup != null) {
     popupCloseBtn.addEventListener("click", () => {
-        popup.parentElement.removeChild(popup);
+        popup.style.display = "none";
+    });
+    document.getElementById("my-trades-href").addEventListener("click", (e) => {
+        e.preventDefault();
+        popup.style.display = "";
     });
 }
 

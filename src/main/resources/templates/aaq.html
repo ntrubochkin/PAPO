@@ -56,14 +56,14 @@
                     <ul class="header_list_basic">
                         <a href="home.html" th:href="@{/home}" class="button_header_1">Главная</a>
                         <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
-                        <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
+                        <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3" id="my-trades-href">Мои обмены</a>
                         <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
-    <div th:if="${!isAuthorized}" id="notification-popup" class="notification">
+    <div th:if="${!isAuthorized}" id="notification-popup" style="display: none;" class="notification">
         <div class="okno">
             Данный раздел доступен только авторизованному пользователю!
         </div>

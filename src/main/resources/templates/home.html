@@ -25,8 +25,8 @@
                         <img th:src="${b64uAvatar}" alt="" id="imageprofile" class="image_profile">
                     </div>
                     <div>
-                        <div class="username" id="userName">Смелый заяц</div>
-                        <div class="rating" id="rating">Рейтинг 2</div>
+                        <div class="username" id="userName" th:text="${uName}">Смелый заяц</div>
+                        <div class="rating" id="rating" th:text="Рейтинг + ' ' + ${uRating}">Рейтинг 2</div>
                     </div>
                     <div id="exit-btn" class="exit_button">
                         <div class="exit_button">
@@ -59,7 +59,7 @@
                     <ul class="header_list_basic">
                         <a href="home.html" th:href="@{/home}" class="button_header_1">Главная</a>
                         <a href="go_trade.html" th:href="@{/go_trade}" class="button_header_2">Начать обмен</a>
-                        <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3">Мои обмены</a>
+                        <a href="my_trades.html" th:href="@{/my_trades}" class="button_header_3" id="my-trades-href">Мои обмены</a>
                         <a href="aaq.html" th:href="@{/aaq}" class="button_header_3">Задать вопрос</a>
                         <!-- <button type="submit" class="button_header_1">Главная</button>
                             <button type="submit" class="button_header_2">Начать обмен</button>
@@ -69,7 +69,7 @@
             </div>
         </div>
     </header>
-    <div th:if="${!isAuthorized}" id="notification-popup" class="notification">
+    <div th:if="${!isAuthorized}" id="notification-popup" style="display: none;" class="notification">
         <div class="okno">
             Данный раздел доступен только авторизованному пользователю!
         </div>

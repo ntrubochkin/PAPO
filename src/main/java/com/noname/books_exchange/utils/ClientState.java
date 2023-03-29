@@ -46,7 +46,7 @@ public class ClientState {
                                   GeneralUtils.imageToBase64String(avatar, avatarType);
     }
 
-    public void setPageInfo(Model model) {
+    public void setGeneralPageInfo(Model model) {
         model.addAttribute(PageAttributes.HOME_IS_ANON, loggedIn);
         model.addAttribute(PageAttributes.USER_AVATAR, avatarBase64String);
         if(loggedIn) {

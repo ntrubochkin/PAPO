@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.Mapping;
 
 @Entity
 @Table(name = "user_info")

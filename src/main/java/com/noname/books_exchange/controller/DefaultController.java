@@ -29,7 +29,7 @@ public class DefaultController {
     //TODO может ему нужно будет выделить свой отдельный файлик
     @RequestMapping("/home")
     public String home(Model model) {
-        clientState.setPageInfo(model);
+        clientState.setGeneralPageInfo(model);
         return "home";
     }
 
@@ -51,13 +51,13 @@ public class DefaultController {
 
     @RequestMapping("/go_trade")
     public String goTrade(Model model) {
-        clientState.setPageInfo(model);
+        clientState.setGeneralPageInfo(model);
         return "go_trade";
     }
 
     @RequestMapping("/my_trades")
     public String myTrades(Model model) {
-        clientState.setPageInfo(model);
+        clientState.setGeneralPageInfo(model);
         if(!clientState.loggedIn) {
             return "redirect:login";
         }
@@ -66,19 +66,19 @@ public class DefaultController {
 
     @RequestMapping("/aaq")
     public String aaq(Model model) {
-        clientState.setPageInfo(model);
+        clientState.setGeneralPageInfo(model);
         return "aaq";
     }
 
     @RequestMapping("/go_get")
     public String goGet(Model model) {
-        clientState.setPageInfo(model);
+        clientState.setGeneralPageInfo(model);
         return "go_get";
     }
 
     @RequestMapping("/go_address")
     public String goAddress(Model model) {
-        clientState.setPageInfo(model);
+        clientState.setGeneralPageInfo(model);
         return "go_address";
     }
 }

@@ -24,9 +24,8 @@ public class UserAddressService {
                               String apartmentNumber,
                               Integer index)
     {
-        String indexStr = (index == null) ? "" : index.toString(); //TODO BRUH
         UserAddress address = new UserAddress(user,
-                                              indexStr,
+                                              index.toString(),
                                               city,
                                               street,
                                               homeNumber,
