@@ -90,10 +90,11 @@ async function sendToServer(data) {
         }
     });
     let json = await response.json();
-    if(json["created"] === "ok") {
+    let status = json["status"];
+    if(status === "created" || status === "exists") {
         window.location.replace("http://localhost:8080/home");
     } else {
-
+        //TODO
+        window.location.replace("http://localhost:8080/login");
     }
-    //TODO
 }

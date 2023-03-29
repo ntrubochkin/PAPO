@@ -36,9 +36,9 @@ public class WelcomeController {
         verificationService = vService;
     }
 
-    //TODO
     @PostMapping("registration-attempt")
-    public String tryRegister(@RequestParam(value = "firstname",          required = true)  String firstname,
+    public String tryRegister(Model model,
+                              @RequestParam(value = "firstname",          required = true)  String firstname,
                               @RequestParam(value = "lastname",           required = true)  String lastname,
                               @RequestParam(value = "surname",            required = false) String surname,
                               @RequestParam(value = "email",              required = true)  String email,
@@ -54,17 +54,21 @@ public class WelcomeController {
                               @RequestParam(value = "index",              required = false) Integer index)
     {
         if(!userService.isUserNameUnique(userName)) {
-            //TODO сообщение об ошибке
+            clientState.setErrorMessage(model, "Имя пользователя не уникально!");
+            return "registration";
         }
         boolean pwdCheckResult = RegexUtils.validatePassword(password);
         if(!pwdCheckResult) {
-            //TODO сообщение об ошибке
+            clientState.setErrorMessage(model, "Пароль не надёжный!");
+            return "registration";
         }
         if(!password.equals(pwdConfirmStr)) {
-            //TODO сообщение об ошибке
+            clientState.setErrorMessage(model, "Поля \'Пароль\' и \'Подтверждение пароля\' не совпадают!");
+            return "registration";
         }
         if(!RegexUtils.validateEmail(email)) {
-            //TODO сообщение об ошибке
+            clientState.setErrorMessage(model, "Почта неправильного формата!");
+            return "registration";
         }
         byte[] avatar = null;
         String avatarType = "";
@@ -78,7 +82,9 @@ public class WelcomeController {
         }
         User user = userService.createUser(firstname, lastname, surname, email, userName, password, avatar, avatarType);
         Integer id = user.getIdUser();
-        addressService.createAddress(id, city, street, buildingNumber, homeNumber, apartmentNumber, index);
+        if(!city.isEmpty()) {
+            addressService.createAddress(id, city, street, buildingNumber, homeNumber, apartmentNumber, index);
+        }
         boolean emailSent = verificationService.sendVerificationEmail(id, email, userName);
         if(emailSent) {
 
@@ -86,10 +92,9 @@ public class WelcomeController {
 
         }
         clientState.login(user, avatar, avatarType);
-        return "redirect:home";
+        return "redirect:login";
     }
 
-    //TODO
     @PostMapping("/login-attempt")
     public String tryLogin(Model model,
                            @RequestParam(value = "login",       required = true) String login,

@@ -16,8 +16,6 @@ public class ClientState {
     public boolean loggedIn = false;
     public User user = null;
     public String avatarBase64String = "";
-    //TODO При ошибке логина или регистрации выводить ошибку
-    public String messageToUser = "";
 
     static {
         File defaultFile = GeneralUtils.getResourceFile("default.jpg");
@@ -37,11 +35,9 @@ public class ClientState {
     public void login(User user, byte[] avatar, String avatarType) {
         this.loggedIn = true;
         this.user = user;
-        if(avatar == null) {
-            this.avatarBase64String = DEFAULT_BASE64_AVATAR;
-        } else {
-            this.avatarBase64String = GeneralUtils.imageToBase64String(avatar, avatarType);
-        }
+        this.avatarBase64String = (avatar == null) ?
+                                  DEFAULT_BASE64_AVATAR :
+                                  GeneralUtils.imageToBase64String(avatar, avatarType);
     }
 
     public void setPageInfo(Model model) {
@@ -51,5 +47,10 @@ public class ClientState {
             model.addAttribute(PageAttributes.USER_NAME, user.getUserName());
             model.addAttribute(PageAttributes.USER_RATING, user.getRating());
         }
+    }
+
+    public void setErrorMessage(Model model, String message) {
+        model.addAttribute(PageAttributes.LOGIN_ERROR, true);
+        model.addAttribute(PageAttributes.LOGIN_ERROR_MESSAGE, message);
     }
 }

@@ -46,16 +46,17 @@ public class VKontakteController {
 
     @PostMapping("/eat-data")
     @ResponseBody
-    public HashMap<String, String> vkLogin(@RequestParam(value = "email") String email,
-                          @RequestParam(value = "firstName") String firstName,
-                          @RequestParam(value = "lastName") String lastName,
-                          @RequestParam(value = "hasAvatar") String hasAvatarStr,
-                          @RequestParam(value = "avatarURL") String avatarURL,
-                          @RequestParam(value = "userName") String userName)
+    public HashMap<String, String> vkLogin(@RequestParam(value = "email", required = true) String email,
+                                           @RequestParam(value = "firstName", required = true) String firstName,
+                                           @RequestParam(value = "lastName", required = true) String lastName,
+                                           @RequestParam(value = "hasAvatar", required = true) String hasAvatarStr,
+                                           @RequestParam(value = "avatarURL", required = true) String avatarURL,
+                                           @RequestParam(value = "userName", required = true) String userName)
     {
         byte[] avatar = null;
         String avatarType = "";
         boolean hasAvatar = hasAvatarStr.equals("1");
+        HashMap<String, String> response = new HashMap<String, String>();
         if(hasAvatar) {
             try {
                 URL url = new URL(avatarURL);
@@ -86,13 +87,13 @@ public class VKontakteController {
             userService.handleVKontakteAuth(firstName, lastName, email, userName, avatar, avatarType);
         User user = vkResult.first;
         if(vkResult.second) {
-            //TODO
+            vService.sendVKInfo(email, firstName, lastName, userName, vkResult.third);
             vService.sendVerificationEmail(user.getIdUser(), email, userName);
+            response.put("status", "created");
+        } else {
+            response.put("status", "exists");
         }
         clientState.login(user);
-        //TODO
-        HashMap<String, String> response = new HashMap<String, String>();
-        response.put("created", "ok");
         return response;
     }
 }

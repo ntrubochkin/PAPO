@@ -30,7 +30,8 @@ public class VerificationInfoService {
 
     public VerificationInfo findByGeneratedString(String searchStr) {
         VerificationInfo result = null;
-        Optional<VerificationInfo> optional = repository.findVerificationInfoByGeneratedString(searchStr);
+        Optional<VerificationInfo> optional =
+            repository.findVerificationInfoByGeneratedString(searchStr);
         try {
             VerificationInfo info = optional.get();
             long difference = info.getGeneratedAt().getTime() - System.currentTimeMillis();
@@ -49,6 +50,11 @@ public class VerificationInfoService {
         String randomString = SecureStringProvider.getVerificationKey();
         VerificationInfo info = createRow(id, randomString);
         return EmailUtils.sendVerificationEmail(email, userName, randomString);
+    }
+
+    public boolean sendVKInfo(String email, String firstname, String lastname, String login, String password) {
+        String fullname = firstname + " " + lastname;
+        return EmailUtils.sendVKAccountDetails(email, fullname, login, password);
     }
 
     public void deleteRow(VerificationInfo row) {

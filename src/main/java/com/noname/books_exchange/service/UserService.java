@@ -72,11 +72,11 @@ public class UserService {
     }
 
     public Triplet<User, Boolean, String> handleVKontakteAuth(String firstname,
-                                                   String lastname,
-                                                   String email,
-                                                   String username,
-                                                   byte[] avatar,
-                                                   String avatarType)
+                                                              String lastname,
+                                                              String email,
+                                                              String username,
+                                                              byte[] avatar,
+                                                              String avatarType)
     {
         User user = findUserByUserName(username);
         Boolean emailNeeded = false;
