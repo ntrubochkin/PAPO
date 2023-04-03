@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IBlankExchangeRepo extends JpaRepository<Category, Integer> {
+public interface ICategoryRepo extends JpaRepository<Category, Integer> {
     @Query("SELECT c FROM Category c WHERE c.idParent = ?1")
     List<Category> findCategoriesByIdParent(int id_categories);
+
+    Category findCategoryByIdCategory(int idCategory);
 }

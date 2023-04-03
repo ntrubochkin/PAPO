@@ -12,11 +12,11 @@ public class OfferList {
     @Id
     private int idOfferList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_book_literary")
     private BookLiterary bookLiterary;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private User user;
 
@@ -31,6 +31,23 @@ public class OfferList {
 
     @OneToMany(mappedBy = "idList")
     private List<UserList> userLists;
+
+    public OfferList() {
+    }
+
+    public OfferList(BookLiterary bookLiterary,
+                     User user,
+                     String isbn,
+                     Date yearPublishing,
+                     Status status) {
+        this.bookLiterary = bookLiterary;
+        this.user = user;
+        this.isbn = isbn;
+        this.yearPublishing = yearPublishing;
+        this.createAt = new Timestamp(System.currentTimeMillis());;
+        this.updateAt = getCreateAt();
+        this.status = status;
+    }
 
     public int getIdOfferList() {
         return idOfferList;

@@ -16,6 +16,15 @@ public class UserList {
     @OneToMany(mappedBy = "userList")
     private List<UserValueCategory> userValueCategoryList;
 
+    public UserList(int typeList, int idList) {
+        checkTypeList(typeList);
+        this.idList = idList;
+    }
+
+    public UserList() {
+
+    }
+
     public int getIdUserList() {
         return idUserList;
     }
@@ -29,9 +38,14 @@ public class UserList {
     }
 
     public void setTypeList(int typeList) {
-        this.typeList = typeList;
+        checkTypeList(typeList);
     }
 
+    private void checkTypeList(int typeList){
+        if(typeList == 1 || typeList == 2){
+            this.typeList = typeList;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

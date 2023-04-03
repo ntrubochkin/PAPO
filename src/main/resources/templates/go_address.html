@@ -86,41 +86,42 @@
                     <div class="blank_stroke">Хочу получить</div>
                     <div class="blank_stroke">Адрес доставки</div> -->
                 </div>
+                <form th:action="@{/address_form}" method="post">
                 <div class="blank_blocks">
                     <div class="address_left_column">
                         <div>Город*</div>
-                        <input name="text" id="city" placeholder="Самара"></input>
+                        <input name="text" id="city" placeholder="Самара"/>
                         <div>Улица*</div>
-                        <input name="text" id="street" placeholder="Название улицы"></input>
+                        <input name="text" id="street" placeholder="Название улицы"/>
 
                         <div class="address_bottom_block">
                             <div class="bottom_block_left">
                                 <div>Строение*</div>
-                                <input name="text" id="building" placeholder="номер"></input>
+                                <input name="text" id="building" placeholder="номер"/>
                             </div>
                             <div class="bottom_block_right">
                                 <div>Дом*</div>
-                                <input name="text" id="home" placeholder="дом"></input>
+                                <input name="text" id="home" placeholder="дом"/>
                             </div>
                             <div class="bottom_block_right">
                                 <div>Квартира</div>
-                                <input name="text" id="apartment" placeholder=""></input>
+                                <input name="text" id="apartment" placeholder=""/>
                             </div>
                         </div>
                         <div class="left_column_index_input">
                             <div>Индекс*</div>
-                            <input name="text" id="index" placeholder="индекс"></input>
+                            <input name="text" id="index" placeholder="индекс"/>
                         </div>
 
 
                     </div>
                     <div class="address_right_column">
                         <div>Фамилия*</div>
-                        <input name="text" id="last_name" placeholder="Иванов"></input>
+                        <input name="text" id="last_name" placeholder="Иванов"/>
                         <div>Имя*</div>
-                        <input name="text" id="first_name" placeholder="Иван"></input>
+                        <input name="text" id="first_name" placeholder="Иван"/>
                         <div>Отчество(при наличии)</div>
-                        <input name="text" id="surname" placeholder="Иванович"></input>
+                        <input name="text" id="surname" placeholder="Иванович"/>
                         
                     </div>
                 </div>
@@ -128,6 +129,7 @@
                     <a href="go_get.html" th:href="@{/go_get}" class="address_left_button">Назад</a>
                     <a href="#" class="address_right_button">Подтвердить данные</a>
                 </div>
+                </form>
             </div>
         </section>
     </main>

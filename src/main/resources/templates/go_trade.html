@@ -44,7 +44,6 @@
                         </li>
                     </ul>
                 </nav>
-
             </div>
         </div>
     </header>
@@ -83,27 +82,28 @@
                     <a href="go_get.html" th:href="@{/go_get}" class="trade_blank_stroke_2">Хочу получить</a>
                     <a href="go_address.html" th:href="@{/go_address}" class="trade_blank_stroke_3">Адрес доставки</a>
                 </div>
+                <form enctype="multipart/form-data" th:action="@{/go_trade}" method="post">
                 <div class="blank_blocks">
                     <div class="left_column">
                         <div class="top_block">
                             <div>Автор*</div>
-                            <div class="author_wrap">
-                                <div><input name="text" id="last_name" placeholder="Фамилия"></input></div>
-                                <div><input name="text" id="first_name" placeholder="Имя"></input></div>
+                            <div class="author_wrap" th:object="${author}">
+                                <div><input name="text" id="last_name" th:field="*{firstName}" placeholder="Фамилия"/></div>
+                                <div><input name="text" id="first_name" th:field="*{lastName}" placeholder="Имя"/></div>
                             </div>
                             <div>Название книги*</div>
-                            <div class="book_title_wrap">
-                                <input name="text" id="book_title" placeholder="Название книги"></input>
+                            <div class="book_title_wrap" th:object="${bookLiterary}">
+                                <input name="text" id="book_title" th:field="*{bookName}" placeholder="Название книги"/>
                             </div>
                         </div>
                         <div class="bottom_block">
                             <div class="bottom_block_left">
                                 <div>ISNB</div>
-                                <input name="text" id="isnb" placeholder="123-4-56789-101-11"></input>
+                                <input name="text" id="isnb" th:name="isbn" placeholder="123-4-56789-101-11"/>
                             </div>
                             <div class="bottom_block_right">
                                 <div>Год издания*</div>
-                                <input name="text" id="year_book" placeholder="2012"></input>
+                                <input name="text" id="year_book" th:name="year" placeholder="2012"/>
                             </div>
                         </div>
                     </div>
@@ -114,8 +114,8 @@
                                 <details>
                                     <summary>Жанр</summary>
                                     <ul>
-                                        <div th:each="gen: ${genre}">
-                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                        <div  th:field="*{genre}" th:each="gen: ${genre}">
+                                            <input type="checkbox" th:value="${gen.idCategory}" id="detective" name="source" value="detective">
                                             <label th:utext="${gen.name}"/>
                                         </div>
                                     </ul>
@@ -123,8 +123,8 @@
                                 <details>
                                     <summary>Область наук</summary>
                                     <ul>
-                                        <div th:each="sf: ${science_field}">
-                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                        <div  th:field="*{science_field}" th:each="sf: ${science_field}">
+                                            <input type="checkbox" th:value="${sf.idCategory}" id="detective" name="source" value="detective">
                                             <label th:utext="${sf.name}"/>
                                         </div>
                                     </ul>
@@ -132,8 +132,8 @@
                                 <details>
                                     <summary>Состояние</summary>
                                     <ul>
-                                        <div th:each="st: ${state}">
-                                            <input type="radio" id="detective" name="source" value="detective">
+                                        <div  th:field="*{state}" th:each="st: ${state}">
+                                            <input type="radio" th:value="${st.idCategory}" id="detective" name="source" value="detective">
                                             <label th:utext="${st.name}"/>
                                         </div>
                                     </ul>
@@ -141,8 +141,8 @@
                                 <details>
                                     <summary>Обложка</summary>
                                     <ul>
-                                        <div th:each="cv: ${cover}">
-                                            <input type="radio" id="detective" name="source" value="detective">
+                                        <div th:field="*{cover}" th:each="cv: ${cover}">
+                                            <input type="radio" th:value="${cv.idCategory}" id="detective" name="source" value="detective">
                                             <label th:utext="${cv.name}"/>
                                         </div>
                                     </ul>
@@ -150,8 +150,8 @@
                                 <details>
                                     <summary>Лауреат</summary>
                                     <ul>
-                                        <div th:each="lau: ${laureate}">
-                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                        <div  th:field="*{laureate}" th:each="lau: ${laureate}">
+                                            <input type="checkbox" th:value="${lau.idCategory}" id="detective" name="source" value="detective">
                                             <label th:utext="${lau.name}"/>
                                         </div>
                                     </ul>
@@ -159,8 +159,8 @@
                                 <details>
                                     <summary>Экранизация</summary>
                                     <ul>
-                                        <div th:each="fm: ${film_adaptation}">
-                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                        <div  th:field="*{film_adaptation}" th:each="fm: ${film_adaptation}">
+                                            <input type="checkbox" th:value="${fm.idCategory}" id="detective" name="source" value="detective">
                                             <label th:utext="${fm.name}"/>
                                         </div>
                                     </ul>
@@ -168,8 +168,8 @@
                                 <details>
                                     <summary>Язык издания</summary>
                                     <ul>
-                                        <div th:each="pl: ${publication_language}">
-                                            <input type="checkbox" id="detective" name="source" value="detective">
+                                        <div  th:field="*{publication_language}" th:each="pl: ${publication_language}">
+                                            <input type="checkbox" th:value="${pl.idCategory}" id="detective" name="source" value="detective">
                                             <label th:utext="${pl.name}"/>
                                         </div>
                                     </ul>
@@ -180,8 +180,9 @@
                 </div>
                 <div class="trade_buttons_column">
                     <!-- <a href="" class="left_button">Назад</a> -->
-                    <a href="go_get.html" th:href="@{/go_get}" class="trade_right_button">Далее</a>
+                    <input style="border: none; text-shadow: 3px 3px 3px #00000079; " type="submit" class="trade_right_button" th:value="Далее"/>
                 </div>
+                </form>
             </div>
         </section>
     </main>

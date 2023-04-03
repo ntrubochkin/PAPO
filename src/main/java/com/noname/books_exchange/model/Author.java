@@ -15,6 +15,10 @@ public class Author {
     @OneToMany(mappedBy = "author")
     private List<BookLiterary> books;
 
+    public Author() {
+
+    }
+
     public int getIdAuthor() {
         return idAuthor;
     }
@@ -36,6 +40,11 @@ public class Author {
     }
 
     public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public Author(String lastName, String firstName) {
+        this.lastName = lastName;
         this.firstName = firstName;
     }
 

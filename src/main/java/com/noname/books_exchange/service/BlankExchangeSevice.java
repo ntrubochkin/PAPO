@@ -1,15 +1,22 @@
 package com.noname.books_exchange.service;
 
-import com.noname.books_exchange.model.Category;
-import com.noname.books_exchange.repository.IBlankExchangeRepo;
+import com.noname.books_exchange.model.*;
+import com.noname.books_exchange.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
 public class BlankExchangeSevice {
-    private final IBlankExchangeRepo blankExchangeRepo;
+    private final ICategoryRepo categoryRepo;
+    private final IAuthorRepo authorRepo;
+    private final IBookLiteraryRepo bookLiteraryRepo;
+    private final IOfferListRepo offerListRepo;
+    private final IStatusRepo statusRepo;
+    private final IUserListRepo userListRepo;
+    private final IUserValueCategoryRepo userValueCategoryRepo;
 
     private List<Category> genre;
     private List<Category> science_field;
@@ -48,21 +55,63 @@ public class BlankExchangeSevice {
     }
 
     @Autowired
-    public BlankExchangeSevice(IBlankExchangeRepo blankExchangeRepo) {
-        this.blankExchangeRepo = blankExchangeRepo;
+    public BlankExchangeSevice(ICategoryRepo categoryRepo,
+                               IAuthorRepo authorRepo,
+                               IBookLiteraryRepo bookLiteraryRepo,
+                               IOfferListRepo offerListRepo, IStatusRepo statusRepo, IUserListRepo userListRepo, IUserValueCategoryRepo userValueCategoryRepo) {
+        this.categoryRepo = categoryRepo;
+        this.authorRepo = authorRepo;
+        this.bookLiteraryRepo = bookLiteraryRepo;
+        this.offerListRepo = offerListRepo;
+        this.statusRepo = statusRepo;
+        this.userListRepo = userListRepo;
+        this.userValueCategoryRepo = userValueCategoryRepo;
     }
 
     public List<Category> findCategoriesByIdParent(int id_categories){
-        return blankExchangeRepo.findCategoriesByIdParent(id_categories);
+        return categoryRepo.findCategoriesByIdParent(id_categories);
     }
 
     public void setAllCategories(){
-        genre = blankExchangeRepo.findCategoriesByIdParent(2);
-        science_field = blankExchangeRepo.findCategoriesByIdParent(3);
-        state = blankExchangeRepo.findCategoriesByIdParent(4);
-        cover = blankExchangeRepo.findCategoriesByIdParent(5);
-        laureate = blankExchangeRepo.findCategoriesByIdParent(6);
-        film_adaptation = blankExchangeRepo.findCategoriesByIdParent(7);
-        publication_language = blankExchangeRepo.findCategoriesByIdParent(8);
+        genre = categoryRepo.findCategoriesByIdParent(2);
+        science_field = categoryRepo.findCategoriesByIdParent(3);
+        state = categoryRepo.findCategoriesByIdParent(4);
+        cover = categoryRepo.findCategoriesByIdParent(5);
+        laureate = categoryRepo.findCategoriesByIdParent(6);
+        film_adaptation = categoryRepo.findCategoriesByIdParent(7);
+        publication_language = categoryRepo.findCategoriesByIdParent(8);
+    }
+
+    public Author getAuthorByName(String firsName, String lastName){
+        return authorRepo.findAuthorByName(firsName, lastName);
+    }
+
+    public Author createAuthor(String firsName, String lastName) {
+        return authorRepo.save(new Author(lastName, firsName));
+    }
+
+    public BookLiterary getBookByTitleAndAuthor(String bookName, Author author){
+        return bookLiteraryRepo.findBookByTitleAndAuthor(bookName, author);
+    }
+
+    public BookLiterary createBookLiterary(String bookName, Author author){
+        return bookLiteraryRepo.save(new BookLiterary(author, bookName));
+    }
+
+    public OfferList createOfferList(BookLiterary bookLiterary, User user, String isbn, Date yearPublishing, Status status){
+        //TODO: ??? Добавить параметры
+        return offerListRepo.save(new OfferList(bookLiterary, user, isbn, yearPublishing, status));
+    }
+
+    public Status getStatusById(int id){
+        return statusRepo.findStatusById(id);
+    }
+
+    public UserList createUserList (int typeList, int idList){
+        return userListRepo.save(new UserList(typeList, idList));
+    }
+
+    public UserValueCategory createUserValueCategory(UserList userList, int categoryId){
+        return userValueCategoryRepo.save(new UserValueCategory(userList, categoryRepo.findCategoryByIdCategory(categoryId)));
     }
 }

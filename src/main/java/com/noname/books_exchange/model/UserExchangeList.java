@@ -8,11 +8,11 @@ public class UserExchangeList {
     @Id
     private int idUserExchangeList;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_exchange_list")
     private ExchangeList exchangeList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_offer_list")
     private OfferList offerList;
 

@@ -10,11 +10,11 @@ public class BookResponse {
     @Id
     private int idBookResponse;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_book_literary")
     private BookLiterary bookLiterary;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private User user;
 

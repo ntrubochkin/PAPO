@@ -10,7 +10,7 @@ public class UserAddress {
     @Id
     private int idUserAddress;
 
-    @ManyToOne //Поле в БД называется id_user
+    @ManyToOne(cascade = CascadeType.ALL) //Поле в БД называется id_user
     @JoinColumn(name = "id_user")
     private User user;
 

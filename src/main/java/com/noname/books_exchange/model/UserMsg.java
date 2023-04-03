@@ -10,7 +10,7 @@ public class UserMsg {
     @Id
     private int idUserMsg;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private User user;
 
@@ -18,7 +18,7 @@ public class UserMsg {
     private String text;
     private String notes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_status")
     private Status status;
 

@@ -11,18 +11,18 @@ public class WishList {
     @Id
     private int idWishList;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private User user;
 
     private Timestamp createAt;
     private Timestamp updateAt;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_status")
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user_address")
     private UserAddress userAddress;
 

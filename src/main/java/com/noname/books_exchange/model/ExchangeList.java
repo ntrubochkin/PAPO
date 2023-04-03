@@ -11,19 +11,19 @@ public class ExchangeList {
     @Id
     private int idExchangeList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_offer_list1")
     private OfferList offerList1;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_wish_list1")
     private WishList wishList1;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_offer_list2")
     private OfferList offerList2;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_wish_list2")
     private WishList wishList2;
 

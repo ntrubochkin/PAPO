@@ -10,7 +10,7 @@ public class BookLiterary {
     @Id
     private int idBookLiterary;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_author")
     private Author author;
 
@@ -19,6 +19,15 @@ public class BookLiterary {
 
     @OneToMany(mappedBy = "bookLiterary")
     private List<BookResponse> bookResponseList;
+
+    public BookLiterary() {
+
+    }
+
+    public BookLiterary(Author author, String bookName) {
+        this.author = author;
+        this.bookName = bookName;
+    }
 
     public int getIdBookLiterary() {
         return idBookLiterary;

@@ -2,19 +2,29 @@ package com.noname.books_exchange.model;
 
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 public class UserValueCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idUserValueCategory;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_list")
     private UserList userList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_category")
     private Category category;
+
+    public UserValueCategory() {
+    }
+
+    public UserValueCategory(UserList userList, Category category) {
+        this.userList = userList;
+        this.category = category;
+    }
 
     public int getIdUserValueCategory() {
         return idUserValueCategory;

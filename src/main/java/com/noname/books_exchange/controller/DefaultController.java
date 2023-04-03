@@ -1,5 +1,9 @@
 package com.noname.books_exchange.controller;
 
+import com.noname.books_exchange.model.Author;
+import com.noname.books_exchange.model.BookLiterary;
+import com.noname.books_exchange.model.OfferList;
+import com.noname.books_exchange.model.UserValueCategory;
 import com.noname.books_exchange.utils.BlankExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +60,11 @@ public class DefaultController {
     public String goTrade(Model model) {
         clientState.setGeneralPageInfo(model);
         //TODO: Венера.Как бы это переделать нормально...
+        model.addAttribute("author", new Author());
+        model.addAttribute("bookLiterary", new BookLiterary());
+        model.addAttribute("userValueCategory", new UserValueCategory());
         blankExchange.setCategories(model);
+
         return "go_trade";
     }
 
