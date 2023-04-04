@@ -232,6 +232,12 @@ body {
 
 /* Header start */
 
+.header_logo-pic {
+  width: 70px;
+  height: 50px;
+  /* transform: rotate(-45deg); */
+}
+
 .header {
   background-color: #1abd9c4d;
   backdrop-filter: blur(5px);
@@ -259,7 +265,7 @@ body {
   padding-top: 10px;
   gap: 10px;
   align-items: center;
-  filter: drop-shadow(3px 3px 3px #000000ce);
+  filter: drop-shadow(2px 2px 2px #000000ce);
 
 }
 
@@ -532,10 +538,17 @@ body {
 
 
 .intro_title {
-  max-width: 800px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  line-break: auto;
+  max-width: 1300px;
   font-weight: 800;
-  font-size: 27px;
-  line-height: 36px;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #2ddab7a4;
+  outline: 1px solid #31ffd6;
+  padding: 50px;
+  text-shadow: 3px 3px 3px #00000079;
 }
 
 .main {
