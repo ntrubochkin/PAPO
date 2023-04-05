@@ -545,7 +545,8 @@ body {
   font-size: 32px;
   line-height: 40px;
   text-align: center;
-  background-color: #2ddab7a4;
+  background-color: #1abd9c4d;
+  backdrop-filter: blur(5px);
   outline: 1px solid #31ffd6;
   padding: 50px;
   text-shadow: 3px 3px 3px #00000079;

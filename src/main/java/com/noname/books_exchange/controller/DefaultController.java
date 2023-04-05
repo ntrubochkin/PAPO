@@ -62,7 +62,6 @@ public class DefaultController {
         //TODO: Венера.Как бы это переделать нормально...
         model.addAttribute("author", new Author());
         model.addAttribute("bookLiterary", new BookLiterary());
-        model.addAttribute("userValueCategory", new UserValueCategory());
         blankExchange.setCategories(model);
 
         return "go_trade";
